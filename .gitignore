@@ -1,0 +1,85 @@
+# IntelliJ IDEA
+
+.idea/
+*.iml
+*.iws
+out/
+
+
+
+# specifikt database config with local info
+
+.idea/dataSources/
+.idea/dataSources.local.xml
+
+
+
+# Maven
+
+target/
+.mvn/
+!/.mvn/wrapper/maven-wrapper.jar
+!/.mvn/wrapper/maven-wrapper.properties
+
+
+# Spring Boot / runtime junk
+
+HELP.md
+
+*.log
+*.tmp
+*.bak
+*.swp
+*.pid
+*.seed
+*.err
+*.out
+
+# Packaged artifacts
+*.class
+*.jar
+*.war
+*.ear
+
+
+# Environment
+# Local env files
+.env
+.env.*
+!env.example
+
+# Keep default app config tracked (CI/CD)
+!application.yml
+!application.properties
+
+# Ignore only developer-local overrides
+application-local.yml
+application-local.properties
+application-*.local.yml
+application-*.local.properties
+
+# Optional example templates (keep if present)
+!application-example.yml
+!application-example.properties
+!application-dev.example.yml
+!application-prod.example.yml
+
+
+# OS
+
+.DS_Store
+Thumbs.db
+
+
+# Editors
+
+.vscode/
+.history/
+
+
+# Local database dumps
+
+*.sql
+*.sql.gz
+*.dump
+
