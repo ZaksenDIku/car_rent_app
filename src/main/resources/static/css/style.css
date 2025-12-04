@@ -1,0 +1,326 @@
+/* link to Google Font Montserrat. May need a more secure import */
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+:root {
+    /* colors and fonts ripped from bilabonnement.dk / ba means bilabonnement */
+
+    --ba-color-primary-blue: #1892c3;
+    --ba-color-background-primary: #ffffff;
+
+    --ba-color-background-cards: #f5f5f7;
+
+    --ba-color-border-cards: #d9d9d9;
+
+    --ba-color-text: #000000;
+
+    --ba-color-text-secondary: #878788;
+
+    --ba-font-family: 'Montserrat', sans-serif;
+
+    /* values not taken from bilabonnement */
+
+    --ba-color-background-cards-dark: #f0f0f0;
+    --red-danger: #a93226;
+
+    --ba-radius-sm: 3px;
+    --ba-radius-md: 20px;
+
+    /* a range of padding values for cards/panels etc */
+    --ba-spacing-sm: 0.5rem;
+    --ba-spacing-md: 1rem;
+    --ba-spacing-lg: 1.5rem;
+
+}
+
+
+/* include padding and border in all calculations in all elements */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    font-family: var(--ba-font-family), serif;
+    color: var(--ba-color-text);
+    background: var(--ba-color-background-primary);
+}
+
+
+/* button a la bilabonnement */
+.ba-btn {
+    min-width: 130px;
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 1.25rem;
+    border-radius: var(--ba-radius-md);
+    border: 2px solid var(--ba-color-primary-blue);
+    background: var(--ba-color-background-cards);
+    color: var(--ba-color-primary-blue);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.ba-btn:hover {
+    background: var(--ba-color-primary-blue);
+    color: var(--ba-color-background-primary);
+}
+
+
+/* button a la bilabonnement but with highlight all the time and reverse when hover */
+.ba-btn--highlight {
+    min-width: 130px;
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 1.25rem;
+    border-radius: var(--ba-radius-md);
+    border: 2px solid var(--ba-color-primary-blue);
+    background: var(--ba-color-primary-blue);
+
+    color: var(--ba-color-background-primary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.ba-btn--highlight:hover {
+    background: var(--ba-color-background-primary);
+    color: var(--ba-color-primary-blue);
+}
+
+
+/* button with red color on hover */
+.btn--danger {
+    min-width: 130px;
+}
+
+.btn--danger:hover {
+    background: var(--red-danger);
+    border: 2px solid var(--red-danger);
+
+}
+
+
+/* button without blue color. More neutral */
+.btn--dim {
+    min-width: 130px;
+    background: var(--ba-color-background-primary);
+    color: var(--ba-color-text);
+    border-color: var(--ba-color-border-cards);
+}
+
+.btn--dim:hover {
+    background: var(--ba-color-background-cards-dark);
+    color: var(--ba-color-text);
+}
+
+
+/* body for datareg pages */
+.datareg-page {
+    background: var(--ba-color-background-primary);
+}
+
+
+/* topbar on datareg pages */
+.datareg-page__top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 2rem;
+    background: var(--ba-color-background-primary);
+    border-bottom: 1px solid var(--ba-color-border-cards);
+}
+
+/* logo in topbar on datareg pages */
+.datareg-page__top-logo {
+    height: 38px;
+    width: auto;
+}
+
+
+/* for the whole area underneath the topbar */
+.datareg-main__layout {
+
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: var(--ba-spacing-lg);
+    padding: 1.5rem 2rem 2rem;
+}
+
+/* for the whole left part of the screen underneath the topbar */
+.datareg-main__pane-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ba-spacing-sm);
+    justify-content: center;
+
+}
+
+/* for the whole right part of the screen underneath the topbar */
+.datareg-main__pane-right {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    gap: 0.75rem;
+}
+
+
+/* for the cards (used in the left pane) */
+.datareg-card {
+    background: var(--ba-color-background-cards);
+    border: 1px solid var(--ba-color-border-cards);
+    border-radius: var(--ba-radius-sm);
+    padding: var(--ba-spacing-lg) var(--ba-spacing-lg);
+
+    /* calc(var(--ba-spacing-md) * 1.25) */
+}
+
+/* for the title above the cards (used in the left pane) */
+.datareg-card__title {
+    text-align: left;
+    font-size: 0.90rem;
+    margin-top: 1.34rem;
+    margin-bottom: 0.75rem;
+
+}
+
+/* for the area holding the buttons inside the card (used in the left pane) */
+.datareg-card__button-group {
+    width: 35vw;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.50rem;
+    justify-content: space-evenly;
+}
+
+/* for the area containing scrollable list and title and Opdater button (used in the right pane) */
+.datareg-car-list-container {
+
+    max-height: 450px;
+    border-radius: var(--ba-radius-sm);
+    background: #f7f7f7;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* for the header inside the area holding the scrollable list (used in the right pane) */
+/* Where title and Update button is placed */
+.datareg-cars__header {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.0rem 1rem;
+}
+
+/* for the title inside the area holding the scrollable list (used in the right pane) */
+.datareg-cars-header__title {
+    font-size: 1rem;
+}
+
+
+/* for the scrollable list (used in the right pane) */
+.datareg-car-list {
+    flex: 1 1 auto;
+    background: var(--ba-color-background-cards);
+    border: 1px solid var(--ba-color-border-cards);
+    border-radius: var(--ba-radius-sm);
+    min-height: 0;
+    overflow-y: auto;
+    padding: 0.5rem 1rem;
+}
+
+/* for if the list is empty and default message is shown (used in the right pane) */
+.datareg-car-list__empty {
+    padding: 1rem 1.25rem;
+    color: var(--ba-color-text-secondary);
+    font-size: 0.9rem;
+}
+
+
+/* the card for holding info about a car in the scrollable list (used in tbe right pane) */
+.datareg-car-card {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+/* for displaying the text info in the car card (used in the right pane) */
+.datareg-car-card__info {
+    flex: 1;
+}
+
+
+/* for containing the buttons in the car card. Se, Udlej. (used in the right pane) */
+.datareg-car-card__actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: 1rem;
+}
+
+/* for buttons Se, Udlej in the car card (used in the right pane) */
+.car-action-btn {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    border-radius: 999px;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+/* for buttons Se in the car card (used in the right pane) */
+.car-action-btn--secondary {
+    background: #e6e6e6;
+    color: #333;
+    border-color: #cfcfcf;
+}
+
+/* for buttons Udlej in the car card (used in the right pane) */
+.car-action-btn--primary {
+    background: var(--ba-color-primary-blue);
+    color: white;
+    border-color: var(--ba-color-primary-blue);
+}
+
+
+/* for the first line in the car card info (model and brand) (used in the right pane) */
+.datareg-car-card__title {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* for the second line in the car card info (stålpris and vogn nr) (used in the right pane) */
+.datareg-car-card__meta {
+    font-size: 0.8rem;
+    color: var(--ba-color-text);
+}
+
+/* for the third line in the car card info (Co2) (used in the right pane) */
+.datareg-car-card__meta--muted {
+    color: var(--ba-color-text-secondary);
+}
+
+/* for getting a bit of distance between stålpris and vogn nr */
+.datareg-car-card__meta span + span {
+    margin-left: 0.75rem;
+}
+
+
+

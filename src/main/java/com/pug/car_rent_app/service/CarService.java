@@ -17,17 +17,23 @@ public class CarService {
     @Autowired
     CarRepository carRepository;
 
-    public List<Car> getCarsAvailable() {
+    public List<Car> getAllCars() {
+        return carRepository.getAllCars();
+    }
 
-        List<Car> allCars = carRepository.getAllCars();
-        List<Car> availableCars = new ArrayList<>();
+    //
+    public List<Car> getAllCarsByStatus(CarStatus carStatus) {
+
+        List<Car> allCars = getAllCars();
+        List<Car> allCarsByStatus = new ArrayList<>();
 
         for (Car car : allCars) {
-            if (car.getCarStatus().equals(CarStatus.AVAILABLE)) {
-                availableCars.add(car);
+            if (car.getCarStatus().equals(carStatus)) {
+                allCarsByStatus.add(car);
             }
         }
-        return availableCars;
+
+        return allCarsByStatus;
 
     }
 

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bilabonnement – Data-Registrering Main page</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+
+<body class="datareg-page">
+
+<header th:replace="~{/fragments/header :: header}"></header>
+
+
+<!-- the whole area underneath the topbar-->
+<main class="datareg-main__layout">
+
+    <!-- the whole left part of the screen underneath the topbar. Left pane -->
+    <section class="datareg-main__pane-left">
+
+
+        <!-- title above a card in the left side of the screen -->
+        <h2 class="datareg-card__title">Kundefunktioner</h2>
+
+        <!-- one of the cards in the left side of the screen -->
+        <section class="datareg-card">
+
+            <!-- button group inside card -->
+            <div class="datareg-card__button-group">
+                <a th:href="@{/client/create}" class="ba-btn">Ny kunde</a>
+                <a th:href="@{/client/search}" class="ba-btn btn">Søg kunder</a>
+                <a th:href="@{/client/delete}" class="ba-btn btn--danger">Fjern kunde</a>
+            </div>
+        </section>
+
+
+        <!-- title above a card in the left side of the screen -->
+        <h2 class="datareg-card__title">Leasekontrakt funktioner</h2>
+
+        <!-- one of the cards in the left side of the screen -->
+        <section class="datareg-card">
+
+            <div class="datareg-card__button-group">
+                <a th:href="@{/lease/create}" class="ba-btn">Ny lease</a>
+                <a th:href="@{/lease/search}" class="ba-btn btn">Søg lease</a>
+                <a th:href="@{/lease/delete}" class="ba-btn btn--danger">Fjern lease</a>
+            </div>
+        </section>
+
+        <!-- title above a card in the left side of the screen -->
+        <h2 class="datareg-card__title">Div</h2>
+
+        <!-- one of the cards in the left side of the screen -->
+        <section class="datareg-card">
+
+            <!-- non-functional right now -->
+            <div class="datareg-card__button-group">
+                <button class="ba-btn btn--dim" type="button">Button</button>
+                <button class="ba-btn btn--dim" type="button">Button</button>
+                <button class="ba-btn btn--dim" type="button">Button</button>
+            </div>
+        </section>
+
+    </section>
+
+
+    <!-- the whole right part of the screen underneath the topbar -->
+    <section class="datareg-main__pane-right">
+
+        <!-- container for holding scrollable list -->
+        <article class="datareg-car-list-container">
+
+            <!-- separate header for the right part of the screen underneath the topbar -->
+            <header class="datareg-cars__header">
+
+                <!-- title in the header -->
+                <h2 class="datareg-cars-header__title">Tilgængelige biler</h2>
+
+                <!-- update button in the header -->
+                <form th:action="@{/dashboard}" method="get">
+                    <button type="submit" class="ba-btn--highlight">Opdater</button>
+                </form>
+            </header>
+
+            <!-- for showing the scrollable list of cars -->
+            <section class="datareg-car-list">
+
+                <!-- if list of cars is empty -->
+                <p class="datareg-car-list__empty" th:if="${#lists.isEmpty(carListAval)}">
+                    Der er ingen biler klar til leasing
+                </p>
+
+                <!-- card for showing a car. And the iteration of the car list -->
+                <article class="datareg-car-card"
+                         th:each="car : ${carListAval}">
+
+                    <!-- the cards info about the car -->
+                    <div class="datareg-car-card__info">
+
+                        <!-- First line: brand and model -->
+                        <div class="datareg-car-card__title"
+                             th:text="${car.brand + ' ' + car.model}">
+                            Brand: % Model: %
+                        </div>
+
+                        <!-- Second line: Stålpris and Vogn nr -->
+                        <div class="datareg-car-card__meta">
+                            <span th:text="'Stålpris: ' + ${car.priceExVat}">Stålpris: %</span>
+                            <span th:text="'Vogn nr.: ' + ${car.vehicleNo}">Vogn nr.: %</span>
+                        </div>
+
+                        <!-- Third line: Co2 -->
+                        <div class="datareg-car-card__meta datareg-car-card__meta--muted">
+                            <span th:text="'CO₂: ' + ${car.co2GramPerKm} + ' gr/km'">CO₂: %</span>
+                        </div>
+                    </div>
+
+                    <!-- button for Se -->
+                    <div class="datareg-car-card__actions">
+                        <a class="car-action-btn car-action-btn--secondary"
+                           th:href="@{/car/view(id=${car.id})}">
+                            Se
+                        </a>
+
+                        <!-- button for Udlej -->
+                        <a class="car-action-btn car-action-btn--primary"
+                           th:href="@{/lease/create(carId=${car.id})}">
+                            Udlej
+                        </a>
+                    </div>
+                </article>
+
+            </section>
+        </article>
+    </section>
+
+</main>
+
+</body>
+</html>
