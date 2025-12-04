@@ -31,5 +31,21 @@ public class CarService {
 
     }
 
+    //Metode til at returnere liste med alle leasede biler
+
+    public List<Car> getCarsLeased(){
+
+        List<Car> allCars = carRepository.getAllCars();
+        List<Car> leasedCars = new ArrayList<>();
+
+        for (Car car : allCars){
+            if (car.getCarStatus().equals(CarStatus.LEASED)){
+                leasedCars.add(car);
+            }
+        }
+        return leasedCars;
+
+    }
+
 
 }
