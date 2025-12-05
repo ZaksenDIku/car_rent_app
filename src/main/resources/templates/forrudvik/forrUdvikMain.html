@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ForrUdvik</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body class="datareg-page">
+
+<div th:replace="fragments/header :: header"></div>
+
+<main class="datareg-main__layout">
+
+    <section class="datareg-main__pane-left">
+        <h1>Lageroverblik</h1>
+
+        <div class="datareg-car-list-container">
+
+            <!-- Header med titel + filter dropdown -->
+            <div class="datareg-cars__header">
+                <div class="datareg-cars-header__title">Biler</div>
+
+                <div>
+                    <label for="lagerFilter">Status:</label>
+                    <select id="lagerFilter">
+                        <option value="LEDIG">Ledig</option>
+                        <option value="UDLEJET">Udlejet</option>
+                        <option value="ALLE">Alle</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Scroll-liste -->
+            <div class="datareg-car-list">
+
+                <!-- AVAILABLE biler -->
+                <div th:each="car : ${availableCars}" class="datareg-car-card">
+                    <div class="datareg-car-card__info">
+                        <div class="datareg-car-card__title" th:text="${car.brand} + ' ' + ${car.model}"></div>
+
+                        <div class="datareg-car-card__meta">
+                            <span th:text="'Vogn: ' + ${car.vehicleNo}"></span>
+                            <span th:text="'Pris: ' + ${car.priceExVat} + ' kr.'"></span>
+                        </div>
+
+                        <div class="datareg-car-card__meta datareg-car-card__meta--muted">
+                            <span th:text="'CO₂: ' + ${car.co2GramPerKm} + ' g/km'"></span>
+                        </div>
+                    </div>
+
+                    <div class="datareg-car-card__actions">
+                        <button class="car-action-btn car-action-btn--secondary">Se</button>
+                        <button class="car-action-btn car-action-btn--primary">Ledig</button>
+                    </div>
+                </div>
+
+                <!-- LEASED biler -->
+                <div th:each="car : ${leasedCars}" class="datareg-car-card">
+                    <div class="datareg-car-card__info">
+                        <div class="datareg-car-card__title" th:text="${car.brand} + ' ' + ${car.model}"></div>
+
+                        <div class="datareg-car-card__meta">
+                            <span th:text="'Vogn: ' + ${car.vehicleNo}"></span>
+                            <span th:text="'Pris: ' + ${car.priceExVat} + ' kr.'"></span>
+                        </div>
+
+                        <div class="datareg-car-card__meta datareg-car-card__meta--muted">
+                            <span th:text="'CO₂: ' + ${car.co2GramPerKm} + ' g/km'"></span>
+                        </div>
+                    </div>
+
+                    <div class="datareg-car-card__actions">
+                        <button class="car-action-btn car-action-btn--secondary">Se</button>
+                        <button class="car-action-btn car-action-btn--primary">Udlejet</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
