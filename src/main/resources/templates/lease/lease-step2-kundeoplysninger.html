@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Ny leasekontrakt – Trin 2: Kundeoplysninger</title>
+    <link rel="stylesheet" th:href="@{/css/style_adjusted.css}">
+
+    <link rel="stylesheet" th:href="@{/css/lease.css}">
+
+</head>
+<body class="datareg-page">
+
+<header th:replace="~{/fragments/header :: header}"></header>
+
+<main class="lease-main">
+
+    <section class="lease-card">
+
+
+        <header class="lease-card__header">
+            <h2 class="lease-card__title">Ny lejeaftale</h2>
+
+            <div th:replace="~{/fragments/lease-steps :: lease-steps}"></div>
+        </header>
+
+
+        <section class="lease-car-inline">
+            <div class="lease-car-inline__info">
+                <div class="lease-car-inline__meta"
+                     th:text="${leaseCreateDto.carBrand + ' ' + leaseCreateDto.carModel + ' (' + leaseCreateDto.vehicleNo + ', ' + leaseCreateDto.vin + ')'}">
+                    Brand Model
+                </div>
+            </div>
+        </section>
+
+
+        <div class="lease-card__intro"
+             th:if="${leaseCreateDto.globalErrorMessage == null}"
+             th:text="'Udfyld kundens oplysninger. Felterne er forudfyldt, hvis du valgte en eksisterende kunde.'">
+            error
+
+        </div>
+
+
+        <section class="lease-card__body">
+
+
+            <div class="lease-form__error"
+                 th:if="${leaseCreateDto.globalErrorMessage != null}"
+                 th:text="${leaseCreateDto.globalErrorMessage}">
+                Fejlbesked
+            </div>
+
+
+            <form th:action="@{/lease/create/step2}" method="post" class="lease-form">
+
+                <div class="lease-grid">
+
+
+                    <div class="lease-form__group col-2">
+                        <label class="lease-form__label" for="nameFirst">Fornavn</label>
+                        <input id="nameFirst" name="nameFirst" type="text"
+                               th:value="${leaseCreateDto.nameFirst}">
+                    </div>
+
+                    <div class="lease-form__group col-2">
+                        <label class="lease-form__label" for="nameLast">Efternavn</label>
+                        <input id="nameLast" name="nameLast" type="text"
+                               th:value="${leaseCreateDto.nameLast}">
+                    </div>
+
+
+                    <div class="lease-form__group">
+                        <label class="lease-form__label" for="street">Gadenavn</label>
+                        <input id="street" name="street" type="text"
+                               th:value="${leaseCreateDto.street}">
+                    </div>
+
+                    <div class="lease-form__group">
+                        <label class="lease-form__label" for="houseNumber">Husnummer</label>
+                        <input id="houseNumber" name="houseNumber" type="text"
+                               th:value="${leaseCreateDto.houseNumber}">
+                    </div>
+
+                    <div class="lease-form__group">
+                        <label class="lease-form__label" for="floor">Etage</label>
+                        <input id="floor" name="floor" type="text"
+                               th:value="${leaseCreateDto.floor}">
+                    </div>
+
+                    <div class="lease-form__group">
+                        <label class="lease-form__label" for="door">Dør</label>
+                        <input id="door" name="door" type="text"
+                               th:value="${leaseCreateDto.door}">
+                    </div>
+
+
+                    <div class="lease-form__group col-2">
+                        <label class="lease-form__label" for="zip">Postnummer</label>
+                        <input id="zip" name="zip" type="text"
+                               th:value="${leaseCreateDto.zip}">
+                    </div>
+
+                    <div class="lease-form__group col-2">
+                        <label class="lease-form__label" for="city">By</label>
+                        <input id="city" name="city" type="text"
+                               th:value="${leaseCreateDto.city}">
+                    </div>
+
+
+                    <div class="lease-form__group col-2">
+                        <label class="lease-form__label" for="phone">Telefon</label>
+                        <input id="phone" name="phone" type="text"
+                               th:value="${leaseCreateDto.phone}">
+                    </div>
+
+                    <div class="lease-form__group col-2">
+                        <label class="lease-form__label" for="email">Email</label>
+                        <input id="email" name="email" type="email"
+                               th:value="${leaseCreateDto.email}">
+                    </div>
+
+                </div>
+
+
+
+                <div class="lease-form__actions">
+                    <button class="ba-btn btn--dim"
+                            type="submit"
+                            name="action"
+                            value="back">
+                        Tilbage
+                    </button>
+
+                    <button class="ba-btn btn--dim"
+                            type="submit"
+                            name="action"
+                            value="cancel">
+                        Fortryd
+                    </button>
+
+                    <button class="ba-btn ba-btn--highlight"
+                            type="submit"
+                            name="action"
+                            value="continue">
+                        Fortsæt
+                    </button>
+                </div>
+            </form>
+
+        </section>
+
+    </section>
+
+</main>
+
+</body>
+</html>
+
+

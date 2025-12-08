@@ -14,12 +14,11 @@ public class DataRegController {
     CarService carService;
 
 
-    // I grabbed the / index page just for testing. It will of course be another mapping */
-    @GetMapping("/")
-    public String dataregmain(Model model) {
-        model.addAttribute("carListAval", carService.getAllCars());
 
-//        model.addAttribute("carListAval", carService.getAllCarsByStatus(CarStatus.AVAILABLE));
+    @GetMapping("/dataregmain")
+    public String dataregmain(Model model) {
+
+        model.addAttribute("carListAval", carService.sortCarListBrand(carService.getAllCarsByStatus(CarStatus.AVAILABLE)));
         return "dataregmain";
     }
 
