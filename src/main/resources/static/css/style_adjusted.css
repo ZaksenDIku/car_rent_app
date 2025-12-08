@@ -1,3 +1,11 @@
+
+
+/* This is an adjustment to the original style.css
+   The idea is to avoid breaking other pages with a merge and then just compare entries
+   across style.css and style_adjusted.css after merging
+ */
+
+
 /* link to Google Font Montserrat. May need a more secure import */
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 

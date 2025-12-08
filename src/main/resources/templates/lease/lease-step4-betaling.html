@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <title>Ny leasekontrakt – Trin 4: Betaling</title>
+  <link rel="stylesheet" th:href="@{/css/style_adjusted.css}">
+
+  <link rel="stylesheet" th:href="@{/css/lease.css}">
+
+</head>
+<body class="datareg-page">
+
+<header th:replace="~{/fragments/header :: header}"></header>
+
+<main class="lease-main">
+
+  <section class="lease-card">
+
+
+    <header class="lease-card__header">
+      <h2 class="lease-card__title">Ny lejeaftale</h2>
+
+      <div th:replace="~{/fragments/lease-steps :: lease-steps}"></div>
+    </header>
+
+
+    <section class="lease-car-inline">
+      <div class="lease-car-inline__info">
+        <div class="lease-car-inline__meta">
+          <p th:text="${leaseFlow.carBrand + ' ' + leaseFlow.carModel + ' (' + leaseFlow.vehicleNo + ', ' + leaseFlow.vin + ')'}">
+            Brand Model</p>
+          <p th:text="${leaseFlow.nameFirst + ' ' + leaseFlow.nameLast}">
+            Kunde navn
+          </p>
+          <p th:text="${leaseFlow.startDate + ' - ' + leaseFlow.months + ' måneder'}">
+            Startdato og antal måneder
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <div class="lease-card__intro"
+         th:if="${leaseFlow.globalErrorMessage == null}"
+         th:text="'Indtast pris, kilometer og eventuel dato for førstegangsydelse.'">
+      Indtast pris, kilometer og eventuel dato for førstegangsydelse.
+    </div>
+
+
+    <section class="lease-card__body">
+
+
+      <div class="lease-form__error"
+           th:if="${leaseFlow.globalErrorMessage != null}"
+           th:text="${leaseFlow.globalErrorMessage}">
+        Fejlbesked
+      </div>
+
+
+      <form th:action="@{/lease/create/step4}" method="post" class="lease-form">
+
+        <div class="lease-grid">
+
+
+          <div class="lease-form__group col-2">
+            <label class="lease-form__label" for="monthlyPrice">
+              Pris per måned
+            </label>
+            <input id="monthlyPrice"
+                   name="monthlyPrice"
+                   type="number"
+                   min="2000" max="10000"
+                   th:value="${leaseFlow.monthlyPrice}">
+          </div>
+
+          <div class="lease-form__group col-2">
+            <label class="lease-form__label" for="maxKmPerMonth">
+              Max km per måned
+            </label>
+            <input id="maxKmPerMonth"
+                   name="maxKmPerMonth"
+                   type="number"
+                   min="1000" max="10000"
+                   th:value="${leaseFlow.maxKmPerMonth}">
+          </div>
+
+
+          <div class="lease-form__group col-2">
+            <label class="lease-form__label" for="firstPaymentDate">
+              Dato for førstegangsydelse (hvis betalt)
+            </label>
+            <input id="firstPaymentDate"
+                   name="firstPaymentDate"
+                   type="date"
+                   th:value="${leaseFlow.firstPaymentDate}">
+          </div>
+
+          <div class="lease-form__group col-2 lease-form__group--checkbox">
+            <label>
+              <input type="checkbox"
+                     name="creditApproved"
+                     th:checked="${leaseFlow.creditApproved}">
+              Kreditvurdering godkendt
+            </label>
+          </div>
+
+        </div>
+
+
+        <div class="lease-form__actions">
+          <button class="ba-btn btn--dim"
+                  type="submit"
+                  name="action"
+                  value="back">
+            Tilbage
+          </button>
+
+          <button class="ba-btn btn--dim"
+                  type="submit"
+                  name="action"
+                  value="cancel">
+            Fortryd
+          </button>
+
+          <button class="ba-btn ba-btn--highlight"
+                  type="submit"
+                  name="action"
+                  value="continue">
+            Fortsæt
+          </button>
+        </div>
+
+      </form>
+
+    </section>
+
+  </section>
+
+</main>
+
+</body>
+</html>
