@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Ny leasekontrakt – Trin 1: Kunde</title>
+    <link rel="stylesheet" th:href="@{/css/style_adjusted.css}">
+
+    <link rel="stylesheet" th:href="@{/css/lease.css}">
+
+</head>
+<body class="datareg-page">
+
+<header th:replace="~{/fragments/header :: header}"></header>
+
+<main class="lease-main">
+
+    <section class="lease-card">
+
+
+        <header class="lease-card__header">
+            <h2 class="lease-card__title">Ny lejeaftale</h2>
+
+            <div th:replace="~{/fragments/lease-steps :: lease-steps}"></div>
+        </header>
+
+
+        <section class="lease-car-inline">
+            <div class="lease-car-inline__info">
+                <div class="lease-car-inline__meta"
+                     th:text="${leaseCreateDto.carBrand + ' ' + leaseCreateDto.carModel + ' (' + leaseCreateDto.vehicleNo + ', ' + leaseCreateDto.vin + ')'}">
+                    Brand Model
+                </div>
+            </div>
+        </section>
+
+        <span class="lease-card__intro">
+            Opret en ny kunde til lejeaftalen eller vælg en eksisterende
+        </span>
+
+
+        <section class="lease-card__body">
+
+            <form th:action="@{/lease/create/step1}" method="post"
+                  class="lease-form">
+
+
+                <div class="lease-form__group--trin1">
+
+
+
+
+                        <div class="lease-customer-list">
+
+                            <label class="lease-customer">
+                                <input type="radio" name="selectedClientId" value=""
+                                       th:checked="${leaseCreateDto.existingClientId} == null">
+                                <span class="lease-customer__text">
+                                <strong>Ny kunde</strong>
+                                <span class="lease-customer__meta">Indtast oplysninger i næste trin</span>
+                            </span>
+                            </label>
+
+
+                            <label class="lease-customer"
+                                   th:each="client : ${leaseCustomers}">
+                                <input type="radio" name="selectedClientId"
+                                       th:value="${client.id}"
+                                       th:checked="${client.id} == ${leaseCreateDto.existingClientId}">
+                                <span class="lease-customer__text">
+
+                                <span class="lease_customer__row">
+
+                                    <span class="lease-customer-last" th:text="${client.nameLast}">efternavn</span>
+                                    <span class="lease-customer-first"
+                                          th:text="${client.nameFirst}">fornavn</span>
+                                    <span class="lease-customer-phone" th:text="${client.phone}">tlf</span>
+                                    <span class="lease-customer-email" th:text="${client.email}">email</span>
+                                </span>
+                            </span>
+                            </label>
+
+
+                        </div>
+
+                </div>
+
+                <div class="lease-form__actions">
+                    <button class="ba-btn btn--dim"
+                            type="submit"
+                            name="action"
+                            value="back">
+                        Tilbage
+                    </button>
+
+                    <button class="ba-btn btn--dim"
+                            type="submit"
+                            name="action"
+                            value="cancel">
+                        Fortryd
+                    </button>
+
+                    <button class="ba-btn ba-btn--highlight"
+                            type="submit"
+                            name="action"
+                            value="continue">
+                        Fortsæt
+                    </button>
+                </div>
+            </form>
+
+        </section>
+
+    </section>
+
+</main>
+</body>
+
+</html>
+

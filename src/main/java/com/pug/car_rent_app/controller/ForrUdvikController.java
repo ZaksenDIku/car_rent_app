@@ -24,7 +24,7 @@ public class ForrUdvikController {
         model.addAttribute("availableCars", carService.getAllCarsByStatus(CarStatus.AVAILABLE));
         model.addAttribute("leasedCars", carService.getAllCarsByStatus(CarStatus.LEASED));
 
-        return "forrUdvikMain";
+        return "/forrudvik/forrUdvikMain";
 
 
     }

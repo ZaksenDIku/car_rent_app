@@ -1,0 +1,375 @@
+
+
+
+.lease-steps {
+    display: flex;
+    gap: var(--ba-spacing-sm);
+    margin-bottom: var(--ba-spacing-md);
+    align-items: center;
+    /*justify-content: flex-start;*/
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.lease-step {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: #e6e6e8;
+    color: var(--ba-color-text-secondary);
+    font-size: 0.8rem;
+}
+
+.lease-step__number {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ba-color-border-cards);
+    font-weight: 600;
+}
+
+.lease-step--current {
+    background: var(--ba-color-primary-blue);
+    color: #ffffff;
+}
+
+.lease-step--current .lease-step__number {
+    background: #ffffff;
+    color: var(--ba-color-primary-blue);
+}
+
+
+
+.lease-form {
+    /*!*margin-top: var(--ba-spacing-md);*!*/
+    /*!*display: flex;*!*/
+    /*!*flex-direction: column;*!*/
+    /*!*gap: var(--ba-spacing-md);*!*/
+
+    /*margin-top: var(--ba-spacing-md);*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*gap: var(--ba-spacing-md);*/
+
+    /*flex: 1 1 auto;
+    /*overflow-y: auto;*/
+    /*min-height: 0;*/
+
+    margin-top: var(--ba-spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ba-spacing-md);
+
+    flex: 1 1 auto;
+
+
+}
+
+
+.lease-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem 1.25rem;
+}
+
+
+.col-2 {
+    grid-column: span 2;
+}
+
+.col-3 {
+    grid-column: span 3;
+}
+
+.col-4 {
+    grid-column: span 4;
+}
+
+
+.lease-form__group {
+    display: flex;
+
+
+
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.lease-form__group--trin1 {
+    display: flex;
+    height: 248px;
+
+
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.lease-form__label {
+    font-size: 0.82rem;
+    color: var(--ba-color-text-secondary);
+}
+
+.lease-form__group input[type="text"],
+.lease-form__group input[type="email"],
+.lease-form__group input[type="number"],
+.lease-form__group input[type="date"] {
+    border-radius: 999px;
+    border: 1px solid var(--ba-color-border-cards);
+    padding: 0.35rem 0.75rem;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.lease-form__group input:focus {
+    border-color: var(--ba-color-primary-blue);
+}
+
+.lease-form__group--checkbox {
+    margin-top: var(--ba-spacing-lg);
+
+}
+
+.lease-form__actions {
+    /*!*display: flex;*!*/
+    /*!*!*justify-content: flex-end;*!*!*/
+    /*!*justify-content: center;*!*/
+    /*!*margin-top: auto;*!*/
+
+    /*!*gap: var(--ba-spacing-sm);*!*/
+
+
+    /*display: flex;*/
+    /*justify-content: center;
+    /*gap: var(--ba-spacing-sm);*/
+
+    /*margin-top: auto;   */
+
+    display: flex;
+    justify-content: center;
+    gap: var(--ba-spacing-sm);
+    margin-top: auto;
+
+}
+
+
+
+
+
+
+
+.lease-form__error {
+    background: #ffe5e5;
+    color: #a80000;
+    /*border-radius: 999px;*/
+    /*padding: 0.4rem 0.75rem;*/
+    font-size: 0.9rem;
+    /*margin-top: var(--ba-spacing-sm);*/
+}
+
+.lease-customer-list-container {
+    /*max-height: 350px; */
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    height: 248px;
+
+}
+
+
+
+.lease-main {
+    flex: 1 1 auto;
+    overflow: hidden;
+    padding: 1.5rem;
+
+    /*display: flex;*/
+    /*justify-content: center; */
+    align-items: flex-start;
+
+    min-height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+
+}
+
+
+.lease-card {
+    /*width: min(100%, 960px); */
+    /*margin-inline: auto;*/
+    /*margin: 0 auto;*/
+    /*margin-top: 0.5rem;*/
+
+
+    /*background: var(--ba-color-background-cards);*/
+    /*border: 1px solid var(--ba-color-border-cards);*/
+    /*border-radius: var(--ba-radius-sm);*/
+    /*padding: var(--ba-spacing-lg);*/
+
+    /*display: flex;*/
+    /*flex-direction: column;*/
+
+    /*!*height: calc(100vh - 80px);*!*/
+    /*height: 100%;*/
+    /*overflow: hidden;*/
+
+
+    width: min(100%, 960px);
+    margin: 0 auto;
+    margin-top: 0.5rem;
+
+    background: var(--ba-color-background-cards);
+    border: 1px solid var(--ba-color-border-cards);
+    border-radius: var(--ba-radius-sm);
+    padding: var(--ba-spacing-lg);
+
+    display: flex;
+    flex-direction: column;
+
+    height: calc(100vh - 80px);
+
+
+}
+
+
+/*.lease-card__body {*/
+/*    flex: 1 1 auto;*/
+/*    overflow-y: auto;*/
+/*    min-height: 0; */
+/*}*/
+
+
+
+.lease-card__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.lease-card__title {
+    font-size: 1rem;
+    margin: 0;
+    text-align: center;
+}
+
+.lease-card__intro {
+    font-size: 0.9rem;
+    color: var(--ba-color-text);
+    margin: 0;
+    text-align: center;
+}
+
+
+.lease-car-inline {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    background: #f0f0f2;
+}
+
+.lease-car-inline__title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.15rem;
+}
+
+.lease-car-inline__meta {
+    font-size: 0.8rem;
+    color: var(--ba-color-text-secondary);
+}
+
+.lease-car-inline__meta span + span {
+    margin-left: 0.75rem;
+}
+
+
+.lease-card__body {
+    /*!*flex: 1 1 auto;*!*/
+    /*!*display: flex;*!*/
+    /*!*flex-direction: column;*!*/
+
+    /*flex: 1 1 auto;*/
+    /*min-height: 0;*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+
+    /*!*gap: var(--ba-spacing-md);*!*/
+
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+
+
+
+}
+
+
+/*
+.lease-card__body {
+    max-height: calc(100vh - 230px);
+    overflow-y: auto;
+}
+*/
+
+
+
+
+.lease-customer-list {
+    display: block;
+    max-height: 248px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    padding: 0.25rem 0;
+}
+
+.lease-customer {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.35rem 0.75rem;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.lease-customer:last-child {
+    border-bottom: none;
+}
+
+.lease-customer input[type="radio"] {
+    margin-top: 0.2rem;
+}
+
+.lease-customer__text {
+    display: flex;
+    flex-direction: column;
+}
+
+.lease-customer__meta {
+    font-size: 0.8rem;
+    color: var(--ba-color-text-secondary);
+}
+
+
+
+
+.lease_customer__row {
+
+    display: grid;
+    grid-template-columns: 150px 130px 130px 1fr;
+    column-gap: 1rem;
+    align-items: center;
+
+}
+
+.lease-summary {
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}

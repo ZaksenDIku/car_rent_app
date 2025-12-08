@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <title>Ny leasekontrakt – Trin 5: Bekræftelse</title>
+  <link rel="stylesheet" th:href="@{/css/style_adjusted.css}">
+
+  <link rel="stylesheet" th:href="@{/css/lease.css}">
+
+</head>
+<body class="datareg-page">
+
+<header th:replace="~{/fragments/header :: header}"></header>
+
+<main class="lease-main">
+
+  <section class="lease-card">
+
+
+    <header class="lease-card__header">
+      <h2 class="lease-card__title">Ny lejeaftale</h2>
+
+      <div th:replace="~{/fragments/lease-steps :: lease-steps}"></div>
+    </header>
+
+
+
+
+    <div class="lease-card__intro">
+      Gennemgå og bekræft leasingaftalen.
+    </div>
+
+
+    <section class="lease-card__body">
+
+      <div class="lease-summary">
+        <h3>Kunde</h3>
+        <p th:text="${leaseCreateDto.nameFirst + ' ' + leaseCreateDto.nameLast}"></p>
+        <p>
+          <span th:text="${leaseCreateDto.street}"></span>&nbsp;
+          <span th:text="${leaseCreateDto.houseNumber}"></span><br>
+          <span th:text="${leaseCreateDto.zip}"></span>&nbsp;
+          <span th:text="${leaseCreateDto.city}"></span>
+        </p>
+        <p>
+          Telefon: <span th:text="${leaseCreateDto.phone}"></span><br>
+          Email: <span th:text="${leaseCreateDto.email}"></span>
+        </p>
+
+        <h3>Periode</h3>
+        <p>
+          Startdato:
+          <span th:text="${leaseCreateDto.startDate}"></span><br>
+          Slutdato:
+          <span th:text="${leaseCreateDto.endDate}"></span><br>
+          Varighed:
+          <span th:text="${leaseCreateDto.months}"></span> måneder
+        </p>
+
+        <h3>Betaling</h3>
+        <p>
+          Pris pr. måned:
+          <span th:text="${leaseCreateDto.monthlyPrice}"></span> kr./md.<br>
+          Maksimum km/md.:
+          <span th:text="${leaseCreateDto.maxKmPerMonth}"></span> km<br>
+          Førstegangsydelse:
+          <span th:text="${leaseCreateDto.firstPaymentDate != null ? leaseCreateDto.firstPaymentDate : 'Ingen'}"></span><br>
+          Kreditvurdering:
+          <span th:text="${leaseCreateDto.creditApproved ? 'Godkendt' : 'Ikke godkendt'}"></span>
+        </p>
+
+        <h3>Bil</h3>
+        <p>
+          <strong th:text="${leaseCreateDto.carBrand + ' ' + leaseCreateDto.carModel}"></strong><br>
+          Vogn nr.:
+          <span th:text="${leaseCreateDto.vehicleNo}"></span><br>
+          VIN:
+          <span th:text="${leaseCreateDto.vin}"></span><br>
+          CO₂:
+          <span th:text="${leaseCreateDto.co2GramPerKm}"></span> g/km
+        </p>
+      </div>
+
+      <form th:action="@{/lease/create/step5}" method="post" class="lease-form">
+        <div class="lease-form__actions">
+          <button class="ba-btn btn--dim"
+                  type="submit"
+                  name="action"
+                  value="back">
+            Tilbage
+          </button>
+
+          <button class="ba-btn btn--dim"
+                  type="submit"
+                  name="action"
+                  value="cancel">
+            Fortryd
+          </button>
+
+          <button class="ba-btn ba-btn--highlight"
+                  type="submit"
+                  name="action"
+                  value="confirm">
+            Bekræft
+          </button>
+        </div>
+      </form>
+
+    </section>
+
+  </section>
+
+</main>
+
+</body>
+</html>

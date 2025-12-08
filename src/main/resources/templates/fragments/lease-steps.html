@@ -1,0 +1,33 @@
+
+    <div class="lease-steps" th:fragment="lease-steps">
+
+        <div class="lease-step"
+             th:classappend="${currentStep == 1} ? ' lease-step--current'">
+            <span class="lease-step__number">1</span>
+            <span class="lease-step__label">Kunde</span>
+        </div>
+
+        <div class="lease-step"
+             th:classappend="${currentStep == 2} ? ' lease-step--current'">
+            <span class="lease-step__number">2</span>
+            <span class="lease-step__label">Kundeoplysninger</span>
+        </div>
+
+        <div class="lease-step"
+             th:classappend="${currentStep == 3} ? ' lease-step--current'">
+            <span class="lease-step__number">3</span>
+            <span class="lease-step__label">Periode</span>
+        </div>
+
+        <div class="lease-step"
+             th:classappend="${currentStep == 4} ? ' lease-step--current'">
+            <span class="lease-step__number">4</span>
+            <span class="lease-step__label">Betaling</span>
+        </div>
+
+        <div class="lease-step"
+             th:classappend="${currentStep == 5} ? ' lease-step--current'">
+            <span class="lease-step__number">5</span>
+            <span class="lease-step__label">Bekræft</span>
+        </div>
+    </div>

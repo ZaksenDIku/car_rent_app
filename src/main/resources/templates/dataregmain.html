@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Bilabonnement – Data-Registrering Main page</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_adjusted.css">
 </head>
 
 
@@ -78,7 +78,7 @@
                 <h2 class="datareg-cars-header__title">Tilgængelige biler</h2>
 
                 <!-- update button in the header -->
-                <form th:action="@{/dashboard}" method="get">
+                <form th:action="@{/dataregmain}" method="get">
                     <button type="submit" class="ba-btn--highlight">Opdater</button>
                 </form>
             </header>
@@ -126,7 +126,7 @@
                         <!-- button for Udlej -->
                         <a class="car-action-btn car-action-btn--primary"
                            th:href="@{/lease/create(carId=${car.id})}">
-                            Udlej
+                            Registrer leje
                         </a>
                     </div>
                 </article>
