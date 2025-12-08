@@ -16,6 +16,9 @@ public class Client {
     private Address address;
 
 
+    public Client() {
+
+    }
 
     public Integer getId() {
         return id;

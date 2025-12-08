@@ -16,6 +16,10 @@ public class LeaseAgreement {
     private LocalDateTime firstPaymentDate;
 
 
+    public LeaseAgreement() {
+
+    }
+
 
     public Integer getId() {
         return id;

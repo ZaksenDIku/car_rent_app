@@ -13,6 +13,10 @@ public class Address {
     private String country;
 
 
+    public Address() {
+
+    }
+
 
     public Integer getId() {
         return id;

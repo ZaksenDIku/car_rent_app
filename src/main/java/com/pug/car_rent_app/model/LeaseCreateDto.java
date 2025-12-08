@@ -44,6 +44,10 @@ public class LeaseCreateDto {
     private String globalErrorMessage;
 
 
+    public LeaseCreateDto() {
+
+    }
+
 
     public Integer getCarId() {
         return carId;
