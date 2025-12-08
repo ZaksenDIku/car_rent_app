@@ -27,7 +27,7 @@
         <section class="lease-car-inline">
             <div class="lease-car-inline__info">
                 <div class="lease-car-inline__meta"
-                     th:text="${leaseFlow.carBrand + ' ' + leaseFlow.carModel + ' (' + leaseFlow.vehicleNo + ', ' + leaseFlow.vin + ')'}">
+                     th:text="${leaseCreateDto.carBrand + ' ' + leaseCreateDto.carModel + ' (' + leaseCreateDto.vehicleNo + ', ' + leaseCreateDto.vin + ')'}">
                     Brand Model
                 </div>
             </div>
@@ -53,7 +53,7 @@
 
                             <label class="lease-customer">
                                 <input type="radio" name="selectedClientId" value=""
-                                       th:checked="${leaseFlow.existingClientId} == null">
+                                       th:checked="${leaseCreateDto.existingClientId} == null">
                                 <span class="lease-customer__text">
                                 <strong>Ny kunde</strong>
                                 <span class="lease-customer__meta">Indtast oplysninger i næste trin</span>
@@ -65,7 +65,7 @@
                                    th:each="client : ${leaseCustomers}">
                                 <input type="radio" name="selectedClientId"
                                        th:value="${client.id}"
-                                       th:checked="${client.id} == ${leaseFlow.existingClientId}">
+                                       th:checked="${client.id} == ${leaseCreateDto.existingClientId}">
                                 <span class="lease-customer__text">
 
                                 <span class="lease_customer__row">

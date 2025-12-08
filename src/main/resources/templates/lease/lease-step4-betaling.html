@@ -27,12 +27,12 @@
     <section class="lease-car-inline">
       <div class="lease-car-inline__info">
         <div class="lease-car-inline__meta">
-          <p th:text="${leaseFlow.carBrand + ' ' + leaseFlow.carModel + ' (' + leaseFlow.vehicleNo + ', ' + leaseFlow.vin + ')'}">
+          <p th:text="${leaseCreateDto.carBrand + ' ' + leaseCreateDto.carModel + ' (' + leaseCreateDto.vehicleNo + ', ' + leaseCreateDto.vin + ')'}">
             Brand Model</p>
-          <p th:text="${leaseFlow.nameFirst + ' ' + leaseFlow.nameLast}">
+          <p th:text="${leaseCreateDto.nameFirst + ' ' + leaseCreateDto.nameLast}">
             Kunde navn
           </p>
-          <p th:text="${leaseFlow.startDate + ' - ' + leaseFlow.months + ' måneder'}">
+          <p th:text="${leaseCreateDto.startDate + ' - ' + leaseCreateDto.months + ' måneder'}">
             Startdato og antal måneder
           </p>
         </div>
@@ -41,7 +41,7 @@
 
 
     <div class="lease-card__intro"
-         th:if="${leaseFlow.globalErrorMessage == null}"
+         th:if="${leaseCreateDto.globalErrorMessage == null}"
          th:text="'Indtast pris, kilometer og eventuel dato for førstegangsydelse.'">
       Indtast pris, kilometer og eventuel dato for førstegangsydelse.
     </div>
@@ -51,8 +51,8 @@
 
 
       <div class="lease-form__error"
-           th:if="${leaseFlow.globalErrorMessage != null}"
-           th:text="${leaseFlow.globalErrorMessage}">
+           th:if="${leaseCreateDto.globalErrorMessage != null}"
+           th:text="${leaseCreateDto.globalErrorMessage}">
         Fejlbesked
       </div>
 
@@ -70,7 +70,7 @@
                    name="monthlyPrice"
                    type="number"
                    min="2000" max="10000"
-                   th:value="${leaseFlow.monthlyPrice}">
+                   th:value="${leaseCreateDto.monthlyPrice}">
           </div>
 
           <div class="lease-form__group col-2">
@@ -81,7 +81,7 @@
                    name="maxKmPerMonth"
                    type="number"
                    min="1000" max="10000"
-                   th:value="${leaseFlow.maxKmPerMonth}">
+                   th:value="${leaseCreateDto.maxKmPerMonth}">
           </div>
 
 
@@ -92,14 +92,14 @@
             <input id="firstPaymentDate"
                    name="firstPaymentDate"
                    type="date"
-                   th:value="${leaseFlow.firstPaymentDate}">
+                   th:value="${leaseCreateDto.firstPaymentDate}">
           </div>
 
           <div class="lease-form__group col-2 lease-form__group--checkbox">
             <label>
               <input type="checkbox"
                      name="creditApproved"
-                     th:checked="${leaseFlow.creditApproved}">
+                     th:checked="${leaseCreateDto.creditApproved}">
               Kreditvurdering godkendt
             </label>
           </div>

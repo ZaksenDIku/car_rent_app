@@ -30,7 +30,7 @@ public class LeaseAgreementService {
 
 
     @Transactional
-    public void createLeaseFromFlow(LeaseCreateDto leaseCreateDto) {
+    public void createLeaseFromDto(LeaseCreateDto leaseCreateDto) {
 
 
         Integer clientId = leaseCreateDto.getExistingClientId();

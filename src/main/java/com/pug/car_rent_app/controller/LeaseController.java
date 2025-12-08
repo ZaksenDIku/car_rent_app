@@ -19,7 +19,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/lease")
-@SessionAttributes("leaseFlow")
+@SessionAttributes("leaseCreateDto")
 public class LeaseController {
 
 
@@ -36,8 +36,8 @@ public class LeaseController {
     private LeaseInputValidator leaseInputValidator;
 
 
-    @ModelAttribute("leaseFlow")
-    public LeaseCreateDto leaseFlow() {
+    @ModelAttribute("leaseCreateDto")
+    public LeaseCreateDto leaseCreateDto() {
         return new LeaseCreateDto();
     }
 
@@ -45,18 +45,18 @@ public class LeaseController {
 
     @GetMapping("/create")
     public String startLease(
-            @RequestParam("carId") int carId, @ModelAttribute("leaseFlow") LeaseCreateDto flow, Model model) {
+            @RequestParam("carId") int carId, @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto, Model model) {
 
 
         Car car = leaseAgreementService.getCarById(carId);
 
 
-        flow.setCarId(car.getId());
-        flow.setCarBrand(car.getBrand());
-        flow.setCarModel(car.getModel());
-        flow.setVehicleNo(car.getVehicleNo());
-        flow.setVin(car.getVin());
-        flow.setCo2GramPerKm(car.getCo2GramPerKm());
+        leaseCreateDto.setCarId(car.getId());
+        leaseCreateDto.setCarBrand(car.getBrand());
+        leaseCreateDto.setCarModel(car.getModel());
+        leaseCreateDto.setVehicleNo(car.getVehicleNo());
+        leaseCreateDto.setVin(car.getVin());
+        leaseCreateDto.setCo2GramPerKm(car.getCo2GramPerKm());
 
 
         List<Client> leaseCustomers = clientService.getAllLeaseClientsSortedLastName();
@@ -74,7 +74,7 @@ public class LeaseController {
     public String handleStep1(
             @RequestParam(name = "selectedClientId", required = false) Integer selectedClientId,
             @RequestParam(name = "action") String action,
-            @ModelAttribute("leaseFlow") LeaseCreateDto flow,
+            @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto,
             Model model,
             SessionStatus status) {
 
@@ -95,43 +95,43 @@ public class LeaseController {
             if (selectedClientId != null) {
 
 
-                if (flow.getExistingClientId() == null ||
-                        !selectedClientId.equals(flow.getExistingClientId())) {
+                if (leaseCreateDto.getExistingClientId() == null ||
+                        !selectedClientId.equals(leaseCreateDto.getExistingClientId())) {
 
 
-                    flow.setNameFirst(null);
-                    flow.setNameLast(null);
-                    flow.setEmail(null);
-                    flow.setPhone(null);
-                    flow.setStreet(null);
-                    flow.setHouseNumber(null);
-                    flow.setFloor(null);
-                    flow.setDoor(null);
-                    flow.setZip(null);
-                    flow.setCity(null);
+                    leaseCreateDto.setNameFirst(null);
+                    leaseCreateDto.setNameLast(null);
+                    leaseCreateDto.setEmail(null);
+                    leaseCreateDto.setPhone(null);
+                    leaseCreateDto.setStreet(null);
+                    leaseCreateDto.setHouseNumber(null);
+                    leaseCreateDto.setFloor(null);
+                    leaseCreateDto.setDoor(null);
+                    leaseCreateDto.setZip(null);
+                    leaseCreateDto.setCity(null);
                 }
 
 
-                flow.setExistingClientId(selectedClientId);
-                flow.setNewClient(false);
+                leaseCreateDto.setExistingClientId(selectedClientId);
+                leaseCreateDto.setNewClient(false);
             }
 
 
             else {
-                flow.setExistingClientId(null);
-                flow.setNewClient(true);
+                leaseCreateDto.setExistingClientId(null);
+                leaseCreateDto.setNewClient(true);
 
 
-                flow.setNameFirst(null);
-                flow.setNameLast(null);
-                flow.setEmail(null);
-                flow.setPhone(null);
-                flow.setStreet(null);
-                flow.setHouseNumber(null);
-                flow.setFloor(null);
-                flow.setDoor(null);
-                flow.setZip(null);
-                flow.setCity(null);
+                leaseCreateDto.setNameFirst(null);
+                leaseCreateDto.setNameLast(null);
+                leaseCreateDto.setEmail(null);
+                leaseCreateDto.setPhone(null);
+                leaseCreateDto.setStreet(null);
+                leaseCreateDto.setHouseNumber(null);
+                leaseCreateDto.setFloor(null);
+                leaseCreateDto.setDoor(null);
+                leaseCreateDto.setZip(null);
+                leaseCreateDto.setCity(null);
             }
 
 
@@ -146,36 +146,36 @@ public class LeaseController {
 
     @GetMapping("/create/step2")
     public String showStep2(
-            @ModelAttribute("leaseFlow") LeaseCreateDto flow,
+            @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto,
             Model model) {
 
 
-        if (!flow.isNewClient() && flow.getExistingClientId() != null && flow.getNameFirst() == null) {
-            Client client = leaseAgreementService.getClientById(flow.getExistingClientId());
-            flow.setNameFirst(client.getNameFirst());
-            flow.setNameLast(client.getNameLast());
-            flow.setEmail(client.getEmail());
-            flow.setPhone(client.getPhone());
+        if (!leaseCreateDto.isNewClient() && leaseCreateDto.getExistingClientId() != null && leaseCreateDto.getNameFirst() == null) {
+            Client client = leaseAgreementService.getClientById(leaseCreateDto.getExistingClientId());
+            leaseCreateDto.setNameFirst(client.getNameFirst());
+            leaseCreateDto.setNameLast(client.getNameLast());
+            leaseCreateDto.setEmail(client.getEmail());
+            leaseCreateDto.setPhone(client.getPhone());
 
             if (client.getAddress() != null) {
-                flow.setStreet(client.getAddress().getStreet());
-                flow.setHouseNumber(client.getAddress().getHouseNumber());
-                flow.setFloor(client.getAddress().getFloor());
-                flow.setDoor(client.getAddress().getDoor());
-                flow.setZip(client.getAddress().getZip());
-                flow.setCity(client.getAddress().getCity());
+                leaseCreateDto.setStreet(client.getAddress().getStreet());
+                leaseCreateDto.setHouseNumber(client.getAddress().getHouseNumber());
+                leaseCreateDto.setFloor(client.getAddress().getFloor());
+                leaseCreateDto.setDoor(client.getAddress().getDoor());
+                leaseCreateDto.setZip(client.getAddress().getZip());
+                leaseCreateDto.setCity(client.getAddress().getCity());
             }
         }
 
         model.addAttribute("currentStep", 2);
-        flow.setGlobalErrorMessage(null);
+        leaseCreateDto.setGlobalErrorMessage(null);
         return "lease/lease-step2-kundeoplysninger";
     }
 
     @PostMapping("/create/step2")
     public String handleStep2(
             @RequestParam("action") String action,
-            @ModelAttribute("leaseFlow") LeaseCreateDto flow,
+            @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto,
             Model model,
             SessionStatus status) {
 
@@ -185,21 +185,21 @@ public class LeaseController {
         }
 
         if ("back".equals(action)) {
-            return "redirect:/lease/create?carId=" + flow.getCarId();
+            return "redirect:/lease/create?carId=" + leaseCreateDto.getCarId();
         }
 
 
-        String error = leaseInputValidator.validateClientFields(flow);
+        String error = leaseInputValidator.validateClientFields(leaseCreateDto);
 
 
         if (error != null) {
-            flow.setGlobalErrorMessage(error);
+            leaseCreateDto.setGlobalErrorMessage(error);
             model.addAttribute("currentStep", 2);
             return "lease/lease-step2-kundeoplysninger";
         }
 
 
-        flow.setGlobalErrorMessage(null);
+        leaseCreateDto.setGlobalErrorMessage(null);
         return "redirect:/lease/create/step3";
     }
 
@@ -208,7 +208,7 @@ public class LeaseController {
 
     @GetMapping("/create/step3")
     public String showStep3(
-            @ModelAttribute("leaseFlow") LeaseCreateDto flow,
+            @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto,
             Model model) {
 
         model.addAttribute("currentStep", 3);
@@ -219,7 +219,7 @@ public class LeaseController {
     @PostMapping("/create/step3")
     public String handleStep3(
             @RequestParam("action") String action,
-            @ModelAttribute("leaseFlow") LeaseCreateDto flow,
+            @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto,
             Model model,
             SessionStatus status) {
 
@@ -233,38 +233,38 @@ public class LeaseController {
         }
 
 
-        if (flow.getStartDate() == null || flow.getMonths() == null) {
-            flow.setGlobalErrorMessage("Manglende udfyldning");
+        if (leaseCreateDto.getStartDate() == null || leaseCreateDto.getMonths() == null) {
+            leaseCreateDto.setGlobalErrorMessage("Manglende udfyldning");
             model.addAttribute("currentStep", 3);
             model.addAttribute("today", LocalDate.now());
             return "lease/lease-step3-periode";
         }
 
-//        if (flow.getStartDate().isBefore(LocalDate.now())) {
-//            flow.setGlobalErrorMessage("Startdato kan ikke være før dags dato");
+//        if (leaseCreateDto.getStartDate().isBefore(LocalDate.now())) {
+//            leaseCreateDto.setGlobalErrorMessage("Startdato kan ikke være før dags dato");
 //            model.addAttribute("currentStep", 3);
 //            model.addAttribute("today", LocalDate.now());
 //            return "lease/lease-step3-periode";
 //        }
 
-//        if (flow.getMonths() < 3 || flow.getMonths() > 36) {
-//            flow.setGlobalErrorMessage("Måneder skal være mellem 3 og 36");
+//        if (leaseCreateDto.getMonths() < 3 || leaseCreateDto.getMonths() > 36) {
+//            leaseCreateDto.setGlobalErrorMessage("Måneder skal være mellem 3 og 36");
 //            model.addAttribute("currentStep", 3);
 //            model.addAttribute("today", LocalDate.now());
 //            return "lease/lease-step3-periode";
 //        }
 
 
-        flow.setEndDate(flow.getStartDate().plusMonths(flow.getMonths()));
+        leaseCreateDto.setEndDate(leaseCreateDto.getStartDate().plusMonths(leaseCreateDto.getMonths()));
 
-        flow.setGlobalErrorMessage(null);
+        leaseCreateDto.setGlobalErrorMessage(null);
         return "redirect:/lease/create/step4";
     }
 
 
     @GetMapping("/create/step4")
     public String showStep4(
-            @ModelAttribute("leaseFlow") LeaseCreateDto flow,
+            @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto,
             Model model) {
 
         model.addAttribute("currentStep", 4);
@@ -275,7 +275,7 @@ public class LeaseController {
     @PostMapping("/create/step4")
     public String handleStep4(
             @RequestParam("action") String action,
-            @ModelAttribute("leaseFlow") LeaseCreateDto leaseCreateDto,
+            @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto,
             Model model,
             SessionStatus status) {
 
@@ -341,7 +341,7 @@ public class LeaseController {
 
     @GetMapping("/create/step5")
     public String showStep5(
-            @ModelAttribute("leaseFlow") LeaseCreateDto flow,
+            @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto,
             Model model) {
 
         model.addAttribute("currentStep", 5);
@@ -351,7 +351,7 @@ public class LeaseController {
     @PostMapping("/create/step5")
     public String handleStep5(
             @RequestParam("action") String action,
-            @ModelAttribute("leaseFlow") LeaseCreateDto flow,
+            @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto,
             SessionStatus status) {
 
         if ("cancel".equals(action)) {
@@ -364,7 +364,7 @@ public class LeaseController {
         }
 
 
-        leaseAgreementService.createLeaseFromFlow(flow);
+        leaseAgreementService.createLeaseFromDto(leaseCreateDto);
 
 
         status.setComplete();
