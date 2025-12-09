@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Business Dashboard</title>
+
+    <!-- Fælles CSS-fil -->
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body class="page">
+
+<header class="page-header">
+    <div class="page-header__logo">
+        <span class="page-header__title">Bilabonnement – Business Dashboard</span>
+    </div>
+    <button class="page-header__logout-button">Logout</button>
+</header>
+
+<main class="dashboard">
+
+    <!-- Venstre kolonne: Lageroverblik -->
+    <section class="dashboard__section dashboard__section--inventory">
+        <h1 class="dashboard__section-title">Lageroverblik</h1>
+
+        <div class="inventory-list">
+
+            <!-- Dummy-kort indtil I har rigtige data -->
+            <article class="inventory-card">
+                <div class="inventory-card__image"></div>
+                <div class="inventory-card__content">
+                    <h2 class="inventory-card__title">Bil titel / model</h2>
+                    <p class="inventory-card__description">
+                        Kort beskrivelse af bilen eller status.
+                    </p>
+                    <span class="inventory-card__status-badge">Udlejet</span>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Midter kolonne: KPI / DATA (kan udfyldes senere) -->
+    <section class="dashboard__section dashboard__section--kpi">
+        <h1 class="dashboard__section-title">KPI / DATA</h1>
+
+        <div class="kpi-panel">
+            <div class="kpi-panel__item">
+                <span class="kpi-panel__label">Totalt udlejet</span>
+                <span class="kpi-panel__value">0</span>
+            </div>
+
+            <div class="kpi-panel__item">
+                <span class="kpi-panel__label">Total pris på udlejet</span>
+                <span class="kpi-panel__value">0 kr.</span>
+            </div>
+
+            <div class="kpi-panel__item">
+                <span class="kpi-panel__label">Gns. betalingstid</span>
+                <span class="kpi-panel__value">–</span>
+            </div>
+
+            <div class="kpi-panel__item">
+                <span class="kpi-panel__label">Gns. transporttid</span>
+                <span class="kpi-panel__value">–</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Højre kolonne: Afregistrer i dag (vores alarm) -->
+    <section class="dashboard__section dashboard__section--deregister">
+        <h1 class="dashboard__section-title">Afregistrer i dag</h1>
+
+        <!-- Hvis der ingen leases er, der slutter i dag -->
+        <div class="deregister-list" th:if="${#lists.isEmpty(leasesEndingToday)}">
+            <p class="deregister-list__empty-text">
+                Der er ingen lejeaftaler, der har sidste dag i dag.
+            </p>
+        </div>
+
+        <!-- Hvis der ER leases, der slutter i dag -->
+        <div class="deregister-list" th:if="${!#lists.isEmpty(leasesEndingToday)}">
+            <article class="deregister-card"
+                     th:each="lease : ${leasesEndingToday}">
+                <div class="deregister-card__image"></div>
+
+                <div class="deregister-card__content">
+                    <h2 class="deregister-card__title"
+                        th:text="${lease.brand} + ' ' + ${lease.model}">
+                        Bilnavn
+                    </h2>
+
+                    <p class="deregister-card__text">
+                        Vognnummer:
+                        <span th:text="${lease.vehicleNo}">ABC123</span><br>
+                        Lease ID:
+                        <span th:text="${lease.leaseId}">1</span><br>
+                        Slutdato:
+                        <span th:text="${#temporals.format(lease.endDate, 'dd-MM-yyyy HH:mm')}">
+                        01-01-2025 12:00
+                    </span>
+                    </p>
+                </div>
+
+                <button class="deregister-card__button">
+                    Afregistrer
+                </button>
+            </article>
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>

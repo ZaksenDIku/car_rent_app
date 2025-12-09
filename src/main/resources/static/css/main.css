@@ -1,0 +1,114 @@
+/* Grundopsætning */
+body.page {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    background-color: #f5f5f5;
+    color: #222;
+}
+
+/* Header */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+}
+
+.page-header__title {
+    font-weight: 600;
+}
+
+.page-header__logout-button {
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: none;
+    background-color: #0096d6; /* blå, inspireret af bilabonnement.dk */
+    color: #ffffff;
+    cursor: pointer;
+}
+
+/* Dashboard layout – tre kolonner */
+.dashboard {
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr;
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+}
+
+.dashboard__section {
+    background-color: #ffffff;
+    border-radius: 4px; /* lille bue på hjørnerne, som i jeres CSS-oplæg :contentReference[oaicite:1]{index=1} */
+    padding: 1rem;
+    box-shadow: 0 0 4px rgba(0,0,0,0.1);
+}
+
+.dashboard__section-title {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+/* Lageroverblik (venstre) */
+.inventory-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inventory-card {
+    display: flex;
+    gap: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.75rem;
+}
+
+.inventory-card__image {
+    width: 80px;
+    height: 60px;
+    background-image: url("/images/car-placeholder.png");
+    background-size: cover;
+    background-position: center;
+    border-radius: 4px;
+}
+
+/* Afregistrer i dag (højre kolonne) */
+.deregister-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.deregister-list__empty-text {
+    font-style: italic;
+    color: #666;
+}
+
+.deregister-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.75rem;
+}
+
+.deregister-card__image {
+    width: 80px;
+    height: 60px;
+    background-image: url("/images/car-placeholder.png");
+    background-size: cover;
+    background-position: center;
+    border-radius: 4px;
+}
+
+.deregister-card__button {
+    margin-left: auto;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: none;
+    background-color: #0096d6;
+    color: #ffffff;
+    cursor: pointer;
+}
