@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bilabonnement – Data-Registrering Main page</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="datareg-page-page">
+
+<header th:replace="~{/fragments/header :: header}"></header>
+
+<h1>Create Condition Report</h1>
+
+<form action="#" th:action="@{/condition_report/create}" th:object="${conditionReport}" method="post">
+
+    <input type="hidden" th:field="*{id}"/>
+
+    <p><strong>Car:</strong> [[${car.brand}]] [[${car.model}]] ([[${car.licensePlate}]])</p>
+
+    Km counter: <input type="number" th:field="*{km_counter}" /><br /><br />
+
+    <label>Motor:</label><br/>
+    <input type="radio" th:field="*{motorCheck}" value="PASSED"/> Pass
+    <input type="radio" th:field="*{motorCheck}" value="FAILED"/> Fail
+    <br/><br/>
+
+    <label>Brakes:</label><br/>
+    <input type="radio" th:field="*{brakesCheck}" value="PASSED"/> Pass
+    <input type="radio" th:field="*{brakesCheck}" value="FAIELD"/> Fail
+    <br/><br/>
+
+    <label>Exhaust:</label><br/>
+    <input type="radio" th:field="*{exhaustCheck}" value="PASSED"/> Pass
+    <input type="radio" th:field="*{exhaustCheck}" value="FAILED"/> Failed
+    <br/><br/>
+
+    <label>Steering:</label><br/>
+    <input type="radio" th:field="*{steeringCheck}" value="PASSED"/> Pass
+    <input type="radio" th:field="*{steeringCheck}" value="FAILED"/> Failed
+    <br/><br/>
+
+    <label>Undercarriage:</label><br/>
+    <input type="radio" th:field="*{undercarriageCheck}" value="PASSED"/> Pass
+    <input type="radio" th:field="*{undercarriageCheck}" value="FAILED"/> Failed
+    <br/><br/>
+
+    Comment: <br/>
+    <textarea th:field="*{comment}"></textarea><br /><br />
+
+    <input type="hidden" th:field="*{dateTimeCreated}" />
+    <input type="hidden" th:field="*{done_by_id}" />
+    <input type="hidden" th:field="*{return_id}" />
+
+    <button type="submit">Save Report</button>
+
+</form>
+
+</body>
+</html>
