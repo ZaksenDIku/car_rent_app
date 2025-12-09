@@ -50,6 +50,20 @@ public class CarService {
         cars.sort(new CarsSortBrandComp());
         return cars;
     }
+    public List<Car> getCarsReturned() {
+
+        List<Car> allCars = carRepository.getAllCars();
+        List<Car> returnedCars = new ArrayList<>();
+
+        for (Car car : allCars) {
+            if (car.getCarStatus().equals(CarStatus.RETURNED)) {
+                returnedCars.add(car);
+            }
+        }
+        return returnedCars;
+
+    }
+
 
 
 
