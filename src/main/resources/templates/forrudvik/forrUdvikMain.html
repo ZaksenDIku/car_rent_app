@@ -5,10 +5,6 @@
     <title>ForrUdvik</title>
 
     <link rel="stylesheet" th:href="@{/css/forrudvikMain.css}">
-
-
-
-
 </head>
 <body class="datareg-page">
 
@@ -21,87 +17,81 @@
 
         <div class="datareg-car-list-container">
 
-            <!-- Header med titel + filter dropdown -->
             <div class="datareg-cars__header">
                 <div class="datareg-cars-header__title">Biler</div>
             </div>
 
-            <!-- Scroll-liste -->
             <div class="datareg-car-list">
-
                 <div class="datareg-car-columns">
 
                     <!-- AVAILABLE kolonne -->
                     <div class="datareg-car-column">
                         <h3 class="datareg-car-column__title">
                             <span class="col-title-text">Ledige</span>
-                            <span class="count-badge" style="background: green" th:text="${availableCars.size()}"></span>
+                            <span class="count-badge" style="background: #1877f2"
+                                  th:text="${availableCars.size()}">0</span>
                         </h3>
 
                         <div class="datareg-car-scrollbox">
+                            <div th:each="car : ${availableCars}" class="datareg-car-card">
+                                <div class="datareg-car-card__info">
+                                    <div class="datareg-car-card__title"
+                                         th:text="${car.brand + ' ' + car.model}"></div>
 
-                        <!-- AVAILABLE biler -->
-                        <div th:each="car : ${availableCars}" class="datareg-car-card">
-                            <div class="datareg-car-card__info">
-                                <div class="datareg-car-card__title" th:text="${car.brand + ' ' + car.model}"></div>
+                                    <div class="datareg-car-card__meta">
+                                        <span th:text="'Vogn: ' + ${car.vehicleNo}"></span>
+                                        <span th:text="'Pris: ' + ${car.priceExVat} + ' kr.'"></span>
+                                    </div>
 
-                                <div class="datareg-car-card__meta">
-                                    <span th:text="'Vogn: ' + ${car.vehicleNo}"></span>
-                                    <span th:text="'Pris: ' + ${car.priceExVat} + ' kr.'"></span>
+                                    <div class="datareg-car-card__meta datareg-car-card__meta--muted">
+                                        <span th:text="'CO₂: ' + ${car.co2GramPerKm} + ' g/km'"></span>
+                                    </div>
                                 </div>
 
-                                <div class="datareg-car-card__meta datareg-car-card__meta--muted">
-                                    <span th:text="'CO₂: ' + ${car.co2GramPerKm} + ' g/km'"></span>
+                                <div class="datareg-car-card__actions">
+                                    <button class="car-action-btn car-action-btn--secondary">Se</button>
                                 </div>
-                            </div>
-
-                            <div class="datareg-car-card__actions">
-                                <button class="car-action-btn car-action-btn--secondary">Se</button>
                             </div>
                         </div>
-                    </div>
                     </div>
 
                     <!-- LEASED kolonne -->
                     <div class="datareg-car-column">
                         <h3 class="datareg-car-column__title">
                             <span class="col-title-text">Udlejet</span>
-                            <span class="count-badge" th:text="${leasedCars.size()}"></span>
+                            <span class="count-badge" style="background: #1f9d55"
+                                  th:text="${leasedCars.size()}">0</span>
                         </h3>
 
                         <div class="datareg-car-scrollbox">
+                            <div th:each="car : ${leasedCars}" class="datareg-car-card">
+                                <div class="datareg-car-card__info">
+                                    <div class="datareg-car-card__title"
+                                         th:text="${car.brand + ' ' + car.model}"></div>
 
-                        <!-- LEASED biler -->
-                        <div th:each="car : ${leasedCars}" class="datareg-car-card">
-                            <div class="datareg-car-card__info">
-                                <div class="datareg-car-card__title" th:text="${car.brand + ' ' + car.model}"></div>
+                                    <div class="datareg-car-card__meta">
+                                        <span th:text="'Vogn: ' + ${car.vehicleNo}"></span>
+                                        <span th:text="'Pris: ' + ${car.priceExVat} + ' kr.'"></span>
+                                    </div>
 
-                                <div class="datareg-car-card__meta">
-                                    <span th:text="'Vogn: ' + ${car.vehicleNo}"></span>
-                                    <span th:text="'Pris: ' + ${car.priceExVat} + ' kr.'"></span>
+                                    <div class="datareg-car-card__meta datareg-car-card__meta--muted">
+                                        <span th:text="'CO₂: ' + ${car.co2GramPerKm} + ' g/km'"></span>
+                                    </div>
                                 </div>
 
-                                <div class="datareg-car-card__meta datareg-car-card__meta--muted">
-                                    <span th:text="'CO₂: ' + ${car.co2GramPerKm} + ' g/km'"></span>
+                                <div class="datareg-car-card__actions">
+                                    <button class="car-action-btn car-action-btn--secondary">Se</button>
                                 </div>
-                            </div>
-
-                            <div class="datareg-car-card__actions">
-                                <button class="car-action-btn car-action-btn--secondary">Se</button>
                             </div>
                         </div>
                     </div>
-                    </div>
 
                 </div>
-
             </div>
         </div>
-
     </section>
 
     <section class="datareg-main__pane-kpi">
-
         <h1>KPI</h1>
 
         <div class="kpi-card">
@@ -111,18 +101,21 @@
                 <strong th:text="${totalMonthlyPriceLeasesWithAtLeastOneMonthLeft} + ' kr./md.'">0 kr.</strong>
             </div>
         </div>
-
     </section>
 
     <section class="datareg-main__pane-right">
-
-        <h1>Reserveret</h1>
+        <h1>Sidste dag i lejeperiode</h1>
 
         <div class="datareg-car-column">
             <h3 class="datareg-car-column__title">
-                <span class="col-title-text">Reserveret</span>
-                <span class="count-badge" style="background: orange"
-                      th:text="${reservedCars.size()}"></span>
+                <span class="col-title-text"
+                      th:text="'Udløb pr. dags dato (' +
+                               ${#temporals.format(#temporals.createNow(), 'd. MMMM yyyy')} +
+                               ')'">
+                </span>
+
+                <span class="count-badge" style="background: #f59e0b"
+                      th:text="${leasesEndingToday.size()}">0</span>
             </h3>
 
             <div class="datareg-car-scrollbox">
@@ -133,11 +126,11 @@
 
                         <div class="datareg-car-card__meta">
                             <span th:text="'Vogn: ' + ${car.vehicleNo}"></span>
-                            <span th:text="'Pris: ' + ${car.priceExVat} + ' kr.'"></span>
+                            <span th:text="'LeaseID: ' + ${car.leaseId}"></span>
                         </div>
 
                         <div class="datareg-car-card__meta datareg-car-card__meta--muted">
-                            <span th:text="'CO₂: ' + ${car.co2GramPerKm} + ' g/km'"></span>
+                            <span th:text="'CarID: ' + ${car.carId}"></span>
                         </div>
                     </div>
 
@@ -147,7 +140,6 @@
                 </div>
             </div>
         </div>
-
     </section>
 
 </main>

@@ -11,7 +11,7 @@
     --ba-color-text: #000000;
     --ba-color-text-secondary: #878788;
     --ba-font-family: 'Montserrat', sans-serif;
-    --ba-radius-sm: 3px;
+    --ba-radius-sm: 10px; /* lidt skarpere */
     --ba-radius-md: 20px;
     --ba-spacing-sm: 0.5rem;
     --ba-spacing-md: 1rem;
@@ -37,82 +37,193 @@ body {
     background: var(--ba-color-background-primary);
 }
 
+/* === MAIN LAYOUT  === */
 .datareg-main__layout {
     display: grid;
-    grid-template-columns: 3fr 2fr 2fr; /* ← NU MED MIDTEN */
+    grid-template-columns: 2fr 2fr 2fr;
     gap: var(--ba-spacing-lg);
     padding: 1.5rem 2rem 2rem;
+    align-items: start;
+
+
+    /* === FORCE FULL WIDTH LAYOUT === */
+    .datareg-main__layout {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+    }
 }
 
-.datareg-main__pane-left {
+
+/* Ens titler, så de flugter */
+.datareg-main__layout h1 {
+    margin: 0 0 0.9rem 0;
+    font-size: 2.1rem;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+/* === PANE WRAPPERS === */
+.datareg-main__pane-left,
+.datareg-main__pane-kpi,
+.datareg-main__pane-right {
     display: flex;
     flex-direction: column;
     gap: var(--ba-spacing-sm);
 }
 
-/* === CAR LIST AREA === */
+/* === CAR LIST AREA (venstre panel) === */
 .datareg-car-list-container {
     border-radius: var(--ba-radius-sm);
     background: #f7f7f7;
+    border: 1px solid var(--ba-color-border-cards);
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    max-height: none; /* eftersom du nu har egne scrollbokse */
 }
 
+/* Header */
 .datareg-cars__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1rem;
+    padding: 0 0.25rem 0.75rem;
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 0.75rem;
 }
 
 .datareg-cars-header__title {
     font-size: 1rem;
+    font-weight: 600;
 }
 
+/* Indhold baggrund */
 .datareg-car-list {
     background: var(--ba-color-background-cards);
     border: 1px solid var(--ba-color-border-cards);
     border-radius: var(--ba-radius-sm);
-    padding: 0.5rem 1rem;
-    overflow: visible; /* vi slår original scroll fra */
+    padding: 0.75rem;
+    overflow: visible;
 }
 
-/* === CAR CARD === */
+/* === 2-COLUMN LAYOUT (venstre: ledige/udlejet) === */
+.datareg-car-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    align-items: start;
+}
+
+/* Kolonne panel (bruges også i højre) */
+.datareg-car-column {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: var(--ba-radius-sm);
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Kolonne header + badge alignment */
+.datareg-car-column__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+    margin: 0 0 0.6rem 0;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid #ededed;
+
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* === BADGES (ens alle steder) === */
+.count-badge {
+    min-width: 28px;
+    height: 22px;
+    padding: 0 8px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ba-color-primary-blue);
+}
+
+/* === INDIVIDUEL SCROLL BOKS PER KOLONNE === */
+.datareg-car-scrollbox {
+    overflow-y: auto;
+    max-height: 600px;
+    padding-right: 6px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    border: 1px solid #ededed;
+    border-radius: var(--ba-radius-sm);
+    padding: 10px;
+    background: #fafafa;
+}
+
+/* === CAR CARD (ens udseende overalt) === */
 .datareg-car-card {
     display: flex;
     align-items: center;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #eee;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 0.85rem 0.95rem;
+    border: 1px solid #ededed;
+    border-radius: 12px;
+    background: #fff;
 }
 
 .datareg-car-card__info {
     flex: 1;
+    min-width: 0;
 }
 
 .datareg-car-card__title {
-    font-weight: 600;
-    font-size: 0.95rem;
+    font-weight: 650;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
 }
 
 .datareg-car-card__meta {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     color: var(--ba-color-text);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
 }
 
 .datareg-car-card__meta--muted {
     color: var(--ba-color-text-secondary);
-}
-
-.datareg-car-card__meta span + span {
-    margin-left: 0.75rem;
+    margin-top: 0.2rem;
+    font-size: 0.78rem;
 }
 
 /* === CARD BUTTONS === */
+.datareg-car-card__actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: 0.5rem;
+    flex-shrink: 0;
+}
+
 .car-action-btn {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.28rem 0.8rem;
     font-size: 0.85rem;
     border-radius: 999px;
     cursor: pointer;
@@ -132,72 +243,42 @@ body {
     border-color: var(--ba-color-primary-blue);
 }
 
-.datareg-car-card__actions {
-    display: flex;
-    gap: 0.5rem;
-    margin-left: 1rem;
+/* === KPI PANEL === */
+.kpi-card {
+    background: var(--ba-color-background-cards);
+    border: 1px solid var(--ba-color-border-cards);
+    border-radius: var(--ba-radius-sm);
+    padding: var(--ba-spacing-lg);
 }
 
-/* === 2-COLUMN LAYOUT (NYT) === */
-.datareg-car-columns {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-}
-
-.datareg-car-column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.datareg-car-column__title {
-    font-size: 1rem;
-    font-weight: 600;
-    padding-bottom: 4px;
-    margin-bottom: 4px;
+.kpi-title {
+    margin: 0 0 1rem;
+    font-size: 1.05rem;
+    font-weight: 700;
     border-bottom: 1px solid #ddd;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    padding-bottom: 0.5rem;
 }
 
-.datareg-car-column__title {
-    display: flex;                    /* gør det muligt at placere elementer horisontalt */
-    justify-content: space-between;   /* titel til venstre – tal til højre */
-    align-items: center;              /* centrér vertikalt */
-    font-size: 1rem;
-    font-weight: 600;
-    padding-bottom: 4px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid #ddd;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-}
-
-
-/* === INDIVIDUEL SCROLL BOKS PER KOLONNE (NYT) === */
-.datareg-car-scrollbox {
-    overflow-y: auto;
-    max-height: 600px; /* Juster hvis nødvendigt */
-    padding-right: 6px;
+.kpi-item {
+    font-size: 0.98rem;
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    padding: 8px;
-    background: #fafafa;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0.4rem 0;
 }
 
 /* === MOBILE === */
 @media (max-width: 900px) {
+    .datareg-main__layout {
+        grid-template-columns: 1fr;
+    }
+
     .datareg-car-columns {
-        flex-direction: column;
+        grid-template-columns: 1fr;
     }
 }
 
 /* === HEADER / TOPBAR (tilbageført fra style.css) === */
-
 .datareg-page__top-bar {
     display: flex;
     align-items: center;
@@ -213,7 +294,6 @@ body {
 }
 
 /* === BUTTON STYLES (tilbageført fra style.css) === */
-
 .ba-btn {
     min-width: 130px;
     display: inline-flex;
@@ -246,52 +326,3 @@ body {
     background: var(--ba-color-background-cards-dark);
     color: var(--ba-color-text);
 }
-
-.count-badge {
-    background: var(--ba-color-primary-blue);
-    color: white;
-    padding: 2px 8px;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-/* === KPI PANEL === */
-
-.datareg-main__pane-kpi {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 0rem;
-}
-
-.kpi-card {
-    background: var(--ba-color-background-cards);
-    border: 1px solid var(--ba-color-border-cards);
-    border-radius: var(--ba-radius-sm);
-    padding: var(--ba-spacing-lg);
-}
-
-.kpi-title {
-    margin: 0 0 1rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 0.5rem;
-}
-
-.kpi-item {
-    font-size: 1rem;
-    display: flex;
-    justify-content: space-between;
-    padding: 0.4rem 0;
-}
-
-.datareg-main__pane-right {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-
-
