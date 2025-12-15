@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Bilabonnement – Data-Registrering Main page</title>
     <link rel="stylesheet" href="css/style_adjusted.css">
+
 </head>
 
 
@@ -125,7 +126,7 @@
 
                         <!-- button for Udlej -->
                         <a class="car-action-btn car-action-btn--primary"
-                           th:href="@{/lease/create(carId=${car.id})}">
+                           th:href="@{/lease/create/step1(carId=${car.id})}">
                             Registrer leje
                         </a>
                     </div>

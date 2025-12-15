@@ -20,6 +20,19 @@ public class Client {
 
     }
 
+    public Client(Integer id, String nameFirst, String nameLast, String company, String email, String phone, Integer addressId, Integer clientTypeId, Address address) {
+
+        this.id = id;
+        this.nameFirst = nameFirst;
+        this.nameLast = nameLast;
+        this.company = company;
+        this.email = email;
+        this.phone = phone;
+        this.addressId = addressId;
+        this.clientTypeId = clientTypeId;
+        this.address = address;
+    }
+
     public Integer getId() {
         return id;
     }

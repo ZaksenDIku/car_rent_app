@@ -33,6 +33,7 @@ public class LeaseCreateDto {
     private LocalDate startDate;
     private Integer months;
     private LocalDate endDate;
+    private String subscriptionTypeName;
 
 
     private Integer monthlyPrice;
@@ -41,7 +42,7 @@ public class LeaseCreateDto {
     private boolean creditApproved;
 
 
-    private String globalErrorMessage;
+    private String leaseCreateErrorMessage;
 
 
     public LeaseCreateDto() {
@@ -249,11 +250,35 @@ public class LeaseCreateDto {
         this.creditApproved = creditApproved;
     }
 
-    public String getGlobalErrorMessage() {
-        return globalErrorMessage;
+    public String getLeaseCreateErrorMessage() {
+        return leaseCreateErrorMessage;
     }
 
-    public void setGlobalErrorMessage(String globalErrorMessage) {
-        this.globalErrorMessage = globalErrorMessage;
+    public void setLeaseCreateErrorMessage(String leaseCreateErrorMessage) {
+        this.leaseCreateErrorMessage = leaseCreateErrorMessage;
     }
+
+    public String getSubscriptionTypeName() {
+        return subscriptionTypeName;
+    }
+
+    public void setSubscriptionTypeName(String subscriptionTypeName) {
+        this.subscriptionTypeName = subscriptionTypeName;
+    }
+
+    public void setClientNameAddressNull() {
+
+        this.setNameFirst(null);
+        this.setNameLast(null);
+        this.setEmail(null);
+        this.setPhone(null);
+        this.setStreet(null);
+        this.setHouseNumber(null);
+        this.setFloor(null);
+        this.setDoor(null);
+        this.setZip(null);
+        this.setCity(null);
+    }
+
+
 }

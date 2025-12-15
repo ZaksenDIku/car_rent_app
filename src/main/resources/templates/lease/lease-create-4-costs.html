@@ -20,7 +20,7 @@
     <header class="lease-card__header">
       <h2 class="lease-card__title">Ny lejeaftale</h2>
 
-      <div th:replace="~{/fragments/lease-steps :: lease-steps}"></div>
+      <div th:replace="~{/fragments/lease-create-step-indicator :: lease-create-step-insdicator}"></div>
     </header>
 
 
@@ -32,7 +32,7 @@
           <p th:text="${leaseCreateDto.nameFirst + ' ' + leaseCreateDto.nameLast}">
             Kunde navn
           </p>
-          <p th:text="${leaseCreateDto.startDate + ' - ' + leaseCreateDto.months + ' måneder'}">
+          <p th:text="${leaseCreateDto.startDate + ' - ' + leaseCreateDto.months + ' måneder' + ' / ' + leaseCreateDto.subscriptionTypeName}">
             Startdato og antal måneder
           </p>
         </div>
@@ -41,7 +41,7 @@
 
 
     <div class="lease-card__intro"
-         th:if="${leaseCreateDto.globalErrorMessage == null}"
+         th:if="${leaseCreateDto.leaseCreateErrorMessage == null}"
          th:text="'Indtast pris, kilometer og eventuel dato for førstegangsydelse.'">
       Indtast pris, kilometer og eventuel dato for førstegangsydelse.
     </div>
@@ -51,8 +51,8 @@
 
 
       <div class="lease-form__error"
-           th:if="${leaseCreateDto.globalErrorMessage != null}"
-           th:text="${leaseCreateDto.globalErrorMessage}">
+           th:if="${leaseCreateDto.leaseCreateErrorMessage != null}"
+           th:text="${leaseCreateDto.leaseCreateErrorMessage}">
         Fejlbesked
       </div>
 
@@ -69,7 +69,7 @@
             <input id="monthlyPrice"
                    name="monthlyPrice"
                    type="number"
-                   min="2000" max="10000"
+
                    th:value="${leaseCreateDto.monthlyPrice}">
           </div>
 
@@ -80,7 +80,7 @@
             <input id="maxKmPerMonth"
                    name="maxKmPerMonth"
                    type="number"
-                   min="1000" max="10000"
+
                    th:value="${leaseCreateDto.maxKmPerMonth}">
           </div>
 

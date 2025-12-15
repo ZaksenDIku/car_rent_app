@@ -20,7 +20,7 @@
     <header class="lease-card__header">
       <h2 class="lease-card__title">Ny lejeaftale</h2>
 
-      <div th:replace="~{/fragments/lease-steps :: lease-steps}"></div>
+      <div th:replace="~{/fragments/lease-create-step-indicator :: lease-create-step-insdicator}"></div>
     </header>
 
 
@@ -54,7 +54,9 @@
           Slutdato:
           <span th:text="${leaseCreateDto.endDate}"></span><br>
           Varighed:
-          <span th:text="${leaseCreateDto.months}"></span> måneder
+          <span th:text="${leaseCreateDto.months}"></span> måneder<br>
+          Abonnement:
+          <span th:text="${leaseCreateDto.subscriptionTypeName}"></span>
         </p>
 
         <h3>Betaling</h3>

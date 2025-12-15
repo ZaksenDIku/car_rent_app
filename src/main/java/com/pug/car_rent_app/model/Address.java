@@ -17,6 +17,17 @@ public class Address {
 
     }
 
+    public Address(Integer id, String street, String houseNumber, String floor, String door, String zip, String city, String country) {
+        this.id = id;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.floor = floor;
+        this.door = door;
+        this.zip = zip;
+        this.city = city;
+        this.country = country;
+    }
+
 
     public Integer getId() {
         return id;

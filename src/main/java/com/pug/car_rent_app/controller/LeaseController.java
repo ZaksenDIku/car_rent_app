@@ -5,8 +5,8 @@ import com.pug.car_rent_app.model.LeaseCreateDto;
 import com.pug.car_rent_app.model.Client;
 import com.pug.car_rent_app.service.ClientService;
 import com.pug.car_rent_app.service.LeaseAgreementService;
-import com.pug.car_rent_app.repository.ClientRepository;
-import com.pug.car_rent_app.validation.LeaseInputValidator;
+import com.pug.car_rent_app.service.SubscriptionTypeService;
+import com.pug.car_rent_app.validation.createLeaseInputValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,13 +27,12 @@ public class LeaseController {
     private LeaseAgreementService leaseAgreementService;
 
     @Autowired
-    private ClientRepository clientRepository;
-
-    @Autowired
     private ClientService clientService;
 
     @Autowired
-    private LeaseInputValidator leaseInputValidator;
+    private createLeaseInputValidator createLeaseInputValidator;
+    @Autowired
+    private SubscriptionTypeService subscriptionTypeService;
 
 
     @ModelAttribute("leaseCreateDto")
@@ -43,20 +42,23 @@ public class LeaseController {
 
 
 
-    @GetMapping("/create")
+    @GetMapping("/create/step1")
     public String startLease(
             @RequestParam("carId") int carId, @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto, Model model) {
 
 
         Car car = leaseAgreementService.getCarById(carId);
 
+        if (car != null) {
 
-        leaseCreateDto.setCarId(car.getId());
-        leaseCreateDto.setCarBrand(car.getBrand());
-        leaseCreateDto.setCarModel(car.getModel());
-        leaseCreateDto.setVehicleNo(car.getVehicleNo());
-        leaseCreateDto.setVin(car.getVin());
-        leaseCreateDto.setCo2GramPerKm(car.getCo2GramPerKm());
+            leaseCreateDto.setCarId(car.getId());
+            leaseCreateDto.setCarBrand(car.getBrand());
+            leaseCreateDto.setCarModel(car.getModel());
+            leaseCreateDto.setVehicleNo(car.getVehicleNo());
+            leaseCreateDto.setVin(car.getVin());
+            leaseCreateDto.setCo2GramPerKm(car.getCo2GramPerKm());
+        }
+
 
 
         List<Client> leaseCustomers = clientService.getAllLeaseClientsSortedLastName();
@@ -67,7 +69,7 @@ public class LeaseController {
         model.addAttribute("leaseCustomers", leaseCustomers);
         model.addAttribute("currentStep", 1);
 
-        return "lease/lease-step1-kunde";
+        return "lease/lease-create-1-client";
     }
 
     @PostMapping("/create/step1")
@@ -89,26 +91,23 @@ public class LeaseController {
         }
 
 
+        String error = createLeaseInputValidator.validateStep1(leaseCreateDto);
+
+
+        if (error != null) {
+            leaseCreateDto.setLeaseCreateErrorMessage(error);
+            model.addAttribute("currentStep", 1);
+            return "lease/lease-create-1-client";
+        }
+
         if ("continue".equals(action)) {
 
-
             if (selectedClientId != null) {
-
 
                 if (leaseCreateDto.getExistingClientId() == null ||
                         !selectedClientId.equals(leaseCreateDto.getExistingClientId())) {
 
-
-                    leaseCreateDto.setNameFirst(null);
-                    leaseCreateDto.setNameLast(null);
-                    leaseCreateDto.setEmail(null);
-                    leaseCreateDto.setPhone(null);
-                    leaseCreateDto.setStreet(null);
-                    leaseCreateDto.setHouseNumber(null);
-                    leaseCreateDto.setFloor(null);
-                    leaseCreateDto.setDoor(null);
-                    leaseCreateDto.setZip(null);
-                    leaseCreateDto.setCity(null);
+                    leaseCreateDto.setClientNameAddressNull();
                 }
 
 
@@ -121,25 +120,15 @@ public class LeaseController {
                 leaseCreateDto.setExistingClientId(null);
                 leaseCreateDto.setNewClient(true);
 
-
-                leaseCreateDto.setNameFirst(null);
-                leaseCreateDto.setNameLast(null);
-                leaseCreateDto.setEmail(null);
-                leaseCreateDto.setPhone(null);
-                leaseCreateDto.setStreet(null);
-                leaseCreateDto.setHouseNumber(null);
-                leaseCreateDto.setFloor(null);
-                leaseCreateDto.setDoor(null);
-                leaseCreateDto.setZip(null);
-                leaseCreateDto.setCity(null);
+                leaseCreateDto.setClientNameAddressNull();
             }
 
 
             return "redirect:/lease/create/step2";
         }
 
-
-        return "redirect:/lease/create";
+        leaseCreateDto.setLeaseCreateErrorMessage(null);
+        return "redirect:/lease/create/step1";
     }
 
 
@@ -168,8 +157,8 @@ public class LeaseController {
         }
 
         model.addAttribute("currentStep", 2);
-        leaseCreateDto.setGlobalErrorMessage(null);
-        return "lease/lease-step2-kundeoplysninger";
+        leaseCreateDto.setLeaseCreateErrorMessage(null);
+        return "lease/lease-create-2-clientinfo";
     }
 
     @PostMapping("/create/step2")
@@ -185,21 +174,22 @@ public class LeaseController {
         }
 
         if ("back".equals(action)) {
-            return "redirect:/lease/create?carId=" + leaseCreateDto.getCarId();
+            leaseCreateDto.setLeaseCreateErrorMessage(null);
+            return "redirect:/lease/create/step1?carId=" + leaseCreateDto.getCarId();
         }
 
 
-        String error = leaseInputValidator.validateClientFields(leaseCreateDto);
+        String error = createLeaseInputValidator.validateStep2ClientInfoFields(leaseCreateDto);
 
 
         if (error != null) {
-            leaseCreateDto.setGlobalErrorMessage(error);
+            leaseCreateDto.setLeaseCreateErrorMessage(error);
             model.addAttribute("currentStep", 2);
-            return "lease/lease-step2-kundeoplysninger";
+            return "lease/lease-create-2-clientinfo";
         }
 
 
-        leaseCreateDto.setGlobalErrorMessage(null);
+        leaseCreateDto.setLeaseCreateErrorMessage(null);
         return "redirect:/lease/create/step3";
     }
 
@@ -213,7 +203,7 @@ public class LeaseController {
 
         model.addAttribute("currentStep", 3);
         model.addAttribute("today", LocalDate.now());
-        return "lease/lease-step3-periode";
+        return "lease/lease-create-3-period";
     }
 
     @PostMapping("/create/step3")
@@ -232,32 +222,22 @@ public class LeaseController {
             return "redirect:/lease/create/step2";
         }
 
+        String error = createLeaseInputValidator.validateStep3PeriodFields(leaseCreateDto);
 
-        if (leaseCreateDto.getStartDate() == null || leaseCreateDto.getMonths() == null) {
-            leaseCreateDto.setGlobalErrorMessage("Manglende udfyldning");
+
+        if (error != null) {
+            leaseCreateDto.setLeaseCreateErrorMessage(error);
             model.addAttribute("currentStep", 3);
             model.addAttribute("today", LocalDate.now());
-            return "lease/lease-step3-periode";
+            return "lease/lease-create-3-period";
         }
-
-//        if (leaseCreateDto.getStartDate().isBefore(LocalDate.now())) {
-//            leaseCreateDto.setGlobalErrorMessage("Startdato kan ikke være før dags dato");
-//            model.addAttribute("currentStep", 3);
-//            model.addAttribute("today", LocalDate.now());
-//            return "lease/lease-step3-periode";
-//        }
-
-//        if (leaseCreateDto.getMonths() < 3 || leaseCreateDto.getMonths() > 36) {
-//            leaseCreateDto.setGlobalErrorMessage("Måneder skal være mellem 3 og 36");
-//            model.addAttribute("currentStep", 3);
-//            model.addAttribute("today", LocalDate.now());
-//            return "lease/lease-step3-periode";
-//        }
 
 
         leaseCreateDto.setEndDate(leaseCreateDto.getStartDate().plusMonths(leaseCreateDto.getMonths()));
+        leaseCreateDto.setSubscriptionTypeName(subscriptionTypeService.getSubscriptionNameByLength(leaseCreateDto.getMonths()));
 
-        leaseCreateDto.setGlobalErrorMessage(null);
+
+        leaseCreateDto.setLeaseCreateErrorMessage(null);
         return "redirect:/lease/create/step4";
     }
 
@@ -269,7 +249,7 @@ public class LeaseController {
 
         model.addAttribute("currentStep", 4);
         model.addAttribute("today", LocalDate.now());
-        return "lease/lease-step4-betaling";
+        return "lease/lease-create-4-costs";
     }
 
     @PostMapping("/create/step4")
@@ -288,53 +268,16 @@ public class LeaseController {
             return "redirect:/lease/create/step3";
         }
 
+        String error = createLeaseInputValidator.validateStep4CostsFields(leaseCreateDto);
 
-        if (leaseCreateDto.getMonthlyPrice() == null || leaseCreateDto.getMaxKmPerMonth() == null) {
-            leaseCreateDto.setGlobalErrorMessage("Manglende udfyldning");
+
+        if (error != null) {
+            leaseCreateDto.setLeaseCreateErrorMessage(error);
             model.addAttribute("currentStep", 4);
-            model.addAttribute("today", LocalDate.now());
-            return "lease/lease-step4-betaling";
+            return "lease/lease-create-4-costs";
         }
 
-//        if (leaseCreateDto.getMonthlyPrice() < 2000 || leaseCreateDto.getMonthlyPrice() > 10000) {
-//            leaseCreateDto.setGlobalErrorMessage("Pris pr. måned skal være mellem 2000 og 10000");
-//            model.addAttribute("currentStep", 4);
-//            model.addAttribute("today", LocalDate.now());
-//            return "lease/lease-step4-betaling";
-//        }
-
-//        if (leaseCreateDto.getMaxKmPerMonth() < 1000 || leaseCreateDto.getMaxKmPerMonth() > 10000) {
-//            leaseCreateDto.setGlobalErrorMessage("Maksimum km/md. skal være mellem 1000 og 10000");
-//            model.addAttribute("currentStep", 4);
-//            model.addAttribute("today", LocalDate.now());
-//            return "lease/lease-step4-betaling";
-//        }
-
-
-        if (leaseCreateDto.getFirstPaymentDate() != null) {
-            if (leaseCreateDto.getFirstPaymentDate().isBefore(leaseCreateDto.getStartDate())) {
-                leaseCreateDto.setGlobalErrorMessage("Førstegangsydelse kan ikke være før startdato");
-                model.addAttribute("currentStep", 4);
-                model.addAttribute("today", LocalDate.now());
-                return "lease/lease-step4-betaling";
-            }
-//            if (leaseCreateDto.getFirstPaymentDate().isAfter(LocalDate.now())) {
-//                leaseCreateDto.setGlobalErrorMessage("Førstegangsydelse kan ikke være efter dags dato");
-//                model.addAttribute("currentStep", 4);
-//                model.addAttribute("today", LocalDate.now());
-//                return "lease/lease-step4-betaling";
-//            }
-        }
-
-
-        if (!leaseCreateDto.isCreditApproved()) {
-            leaseCreateDto.setGlobalErrorMessage("Kunden skal kreditvurderes før leasing kan gennemføres");
-            model.addAttribute("currentStep", 4);
-            model.addAttribute("today", LocalDate.now());
-            return "lease/lease-step4-betaling";
-        }
-
-        leaseCreateDto.setGlobalErrorMessage(null);
+        leaseCreateDto.setLeaseCreateErrorMessage(null);
         return "redirect:/lease/create/step5";
     }
 
@@ -345,7 +288,7 @@ public class LeaseController {
             Model model) {
 
         model.addAttribute("currentStep", 5);
-        return "lease/lease-step5-bekraftelse";
+        return "lease/lease-create-5-confirmation";
     }
 
     @PostMapping("/create/step5")

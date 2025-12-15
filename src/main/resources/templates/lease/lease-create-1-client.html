@@ -20,7 +20,7 @@
         <header class="lease-card__header">
             <h2 class="lease-card__title">Ny lejeaftale</h2>
 
-            <div th:replace="~{/fragments/lease-steps :: lease-steps}"></div>
+            <div th:replace="~{/fragments/lease-create-step-indicator :: lease-create-step-insdicator}"></div>
         </header>
 
 
@@ -33,12 +33,22 @@
             </div>
         </section>
 
-        <span class="lease-card__intro">
-            Opret en ny kunde til lejeaftalen eller vælg en eksisterende
-        </span>
+        <div class="lease-card__intro"
+             th:if="${leaseCreateDto.leaseCreateErrorMessage == null}"
+             th:text="'Opret en ny kunde til lejeaftalen eller vælg en eksisterende'">
+            error
+
+        </div>
 
 
         <section class="lease-card__body">
+
+            <div class="lease-form__error"
+                 th:if="${leaseCreateDto.leaseCreateErrorMessage != null}"
+                 th:text="${leaseCreateDto.leaseCreateErrorMessage}">
+                Fejlbesked
+            </div>
+
 
             <form th:action="@{/lease/create/step1}" method="post"
                   class="lease-form">

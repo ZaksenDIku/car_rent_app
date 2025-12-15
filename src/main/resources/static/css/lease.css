@@ -43,6 +43,16 @@
     color: var(--ba-color-primary-blue);
 }
 
+.lease-step--done {
+    background: var(--ba-color-primary-blue-dim);
+    color: #ffffff;
+}
+
+.lease-step--done .lease-step__number {
+    background: #ffffff;
+    color: var(--ba-color-primary-blue-dim);
+}
+
 
 
 .lease-form {

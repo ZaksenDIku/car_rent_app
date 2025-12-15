@@ -20,7 +20,7 @@
         <header class="lease-card__header">
             <h2 class="lease-card__title">Ny lejeaftale</h2>
 
-            <div th:replace="~{/fragments/lease-steps :: lease-steps}"></div>
+            <div th:replace="~{/fragments/lease-create-step-indicator :: lease-create-step-insdicator}"></div>
         </header>
 
 
@@ -35,7 +35,7 @@
 
 
         <div class="lease-card__intro"
-             th:if="${leaseCreateDto.globalErrorMessage == null}"
+             th:if="${leaseCreateDto.leaseCreateErrorMessage == null}"
              th:text="'Udfyld kundens oplysninger. Felterne er forudfyldt, hvis du valgte en eksisterende kunde.'">
             error
 
@@ -46,8 +46,8 @@
 
 
             <div class="lease-form__error"
-                 th:if="${leaseCreateDto.globalErrorMessage != null}"
-                 th:text="${leaseCreateDto.globalErrorMessage}">
+                 th:if="${leaseCreateDto.leaseCreateErrorMessage != null}"
+                 th:text="${leaseCreateDto.leaseCreateErrorMessage}">
                 Fejlbesked
             </div>
 
