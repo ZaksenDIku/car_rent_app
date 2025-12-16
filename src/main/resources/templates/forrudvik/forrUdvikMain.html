@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>ForrUdvik</title>
 
-    <link rel="stylesheet" th:href="@{css/forrudvikMain.css}">
+    <link rel="stylesheet" th:href="@{/css/forrudvikMain.css}">
 </head>
 <body class="datareg-page">
 
@@ -29,7 +29,7 @@
                         <h3 class="datareg-car-column__title">
                             <span class="col-title-text">Ledige</span>
                             <span class="count-badge" style="background: #1877f2"
-                                  th:text="${availableCars.size()}">0</span>
+                                  th:text="${#lists.size(availableCars)}">0</span>
                         </h3>
 
                         <div class="datareg-car-scrollbox">
@@ -60,7 +60,7 @@
                         <h3 class="datareg-car-column__title">
                             <span class="col-title-text">Udlejet</span>
                             <span class="count-badge" style="background: #1f9d55"
-                                  th:text="${leasedCars.size()}">0</span>
+                                  th:text="${#lists.size(leasedCars)}">0</span>
                         </h3>
 
                         <div class="datareg-car-scrollbox">
@@ -115,7 +115,7 @@
                 </span>
 
                 <span class="count-badge" style="background: #f59e0b"
-                      th:text="${leasesEndingToday.size()}">0</span>
+                      th:text="${#lists.size(leasesEndingToday)}">0</span>
             </h3>
 
             <div class="datareg-car-scrollbox">
