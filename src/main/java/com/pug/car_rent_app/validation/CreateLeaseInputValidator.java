@@ -1,21 +1,23 @@
 package com.pug.car_rent_app.validation;
 
 import com.pug.car_rent_app.model.LeaseCreateDto;
-import com.pug.car_rent_app.model.SubscriptionType;
 import com.pug.car_rent_app.service.SubscriptionTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.List;
 
 
 @Component
-public class createLeaseInputValidator {
+public class CreateLeaseInputValidator {
 
+    private final SubscriptionTypeService subscriptionTypeService;
 
     @Autowired
-    SubscriptionTypeService subscriptionTypeService;
+    public CreateLeaseInputValidator(SubscriptionTypeService subscriptionTypeService) {
+        this.subscriptionTypeService = subscriptionTypeService;
+    }
+
 
 
     public String validateStep1(LeaseCreateDto leaseCreateDto) {
@@ -68,7 +70,7 @@ public class createLeaseInputValidator {
             return "Efternavn må kun indeholde apostrof, bindestreg, mellemrum og skal slutte på et bogstav";
         }
 
-        if (!leaseCreateDto.getFloor().matches("^(?:st|[0-9]|[1-9][0-9])$")) {
+        if (leaseCreateDto.getFloor() != null && !leaseCreateDto.getFloor().matches("^(?:st|[0-9]|[1-9][0-9])$")) {
             return "Etage skal være st eller 0-99";
         }
 

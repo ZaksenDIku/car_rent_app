@@ -6,7 +6,7 @@ import com.pug.car_rent_app.model.Client;
 import com.pug.car_rent_app.service.ClientService;
 import com.pug.car_rent_app.service.LeaseAgreementService;
 import com.pug.car_rent_app.service.SubscriptionTypeService;
-import com.pug.car_rent_app.validation.createLeaseInputValidator;
+import com.pug.car_rent_app.validation.CreateLeaseInputValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +30,7 @@ public class LeaseController {
     private ClientService clientService;
 
     @Autowired
-    private createLeaseInputValidator createLeaseInputValidator;
+    private CreateLeaseInputValidator createLeaseInputValidator;
     @Autowired
     private SubscriptionTypeService subscriptionTypeService;
 

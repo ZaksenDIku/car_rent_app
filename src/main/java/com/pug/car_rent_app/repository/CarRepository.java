@@ -1,5 +1,6 @@
 package com.pug.car_rent_app.repository;
 
+import com.pug.car_rent_app.exception.NotFoundException;
 import com.pug.car_rent_app.mapper.CarRowMapper;
 import com.pug.car_rent_app.model.Car;
 import com.pug.car_rent_app.model.CarStatus;
@@ -33,7 +34,7 @@ public class CarRepository {
     }
 
 
-    public Car getCarById(int carId) {
+    public Car getCarById(Integer carId) {
         String sql = """
                 SELECT c.id, c.vehicle_no, c.vin, c.license_plate,
                        c.brand, c.model,
@@ -68,10 +69,13 @@ public class CarRepository {
         INSERT INTO car_status_histories(car_id, status_id, change_time)
         VALUES (?, (SELECT id FROM car_statuses WHERE status_code = ?), NOW());
     """;
-        template.update(historySql, carId, statusCode);
+        int numberOfRowsUpdated = template.update(historySql, carId, statusCode);
+
+        if (numberOfRowsUpdated == 0) {
+            throw new NotFoundException("Can't update non-existing car");
+        }
+
     }
-
-
 
 
 }

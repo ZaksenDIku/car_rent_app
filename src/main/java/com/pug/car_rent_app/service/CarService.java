@@ -1,5 +1,7 @@
 package com.pug.car_rent_app.service;
 
+import com.pug.car_rent_app.exception.InvalidSystemStateException;
+import com.pug.car_rent_app.exception.NotFoundException;
 import com.pug.car_rent_app.model.Car;
 import com.pug.car_rent_app.model.CarStatus;
 import com.pug.car_rent_app.model.comparator.CarsSortBrandComp;
@@ -15,8 +17,14 @@ import java.util.List;
 @Service
 public class CarService {
 
-    @Autowired
-    CarRepository carRepository;
+    private final CarRepository carRepository;
+
+    public CarService(CarRepository carRepository) {
+        this.carRepository = carRepository;
+    }
+
+
+
 
     public List<Car> getAllCars() {
         return carRepository.getAllCars();
@@ -38,11 +46,28 @@ public class CarService {
 
     }
 
-    public Car getCarById(int id) {
-        return carRepository.getCarById(id);
+    public Car getCarById(Integer id) {
+
+        if (id == null) {
+            throw new InvalidSystemStateException("Car id must not be null");
+        }
+
+        Car car = carRepository.getCarById(id);
+
+        if (car == null) {
+            throw new NotFoundException("No car with id: " + id);
+        }
+        return car;
     }
 
     public void updateCarStatus(int id, CarStatus carStatus) {
+
+        CarStatus carStatusPre = getCarById(id).getCarStatus();
+
+        if (carStatusPre.compareTo(carStatus) >= 0) {
+            throw new InvalidSystemStateException("invalid car status change");
+        }
+
         carRepository.updateCarStatus(id, carStatus);
 
     }

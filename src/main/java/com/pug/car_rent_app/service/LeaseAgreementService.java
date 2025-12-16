@@ -1,5 +1,6 @@
 package com.pug.car_rent_app.service;
 
+import com.pug.car_rent_app.exception.InvalidSystemStateException;
 import com.pug.car_rent_app.model.*;
 import com.pug.car_rent_app.repository.CarRepository;
 import com.pug.car_rent_app.repository.LeaseAgreementRepository;
@@ -14,24 +15,46 @@ import java.util.List;
 @Service
 public class LeaseAgreementService {
 
-    @Autowired
-    CarRepository carRepository;
 
-
-    @Autowired
-    LeaseAgreementRepository leaseAgreementRepository;
-    @Autowired
-    CarService carService;
     @Autowired
     ClientService clientService;
 
     @Autowired
     AddressService addressService;
 
+    private final CarService carService;
+    private final LeaseAgreementRepository leaseAgreementRepository;
+
+    public LeaseAgreementService(
+            CarService carService,
+            LeaseAgreementRepository leaseAgreementRepository
+    ) {
+        this.carService = carService;
+        this.leaseAgreementRepository = leaseAgreementRepository;
+    }
+
 
     @Transactional
     public void createLeaseFromDto(LeaseCreateDto leaseCreateDto) {
 
+
+        if (leaseCreateDto == null) {
+            throw new InvalidSystemStateException("leaseCreateDto is null");
+        }
+
+        if (leaseCreateDto.getCarId() == null) {
+            throw new InvalidSystemStateException("No car specified with id in leaseCreateDto");
+        }
+        Car car = carService.getCarById(leaseCreateDto.getCarId());
+
+
+        if (leaseCreateDto.getMonthlyPrice() == null) {
+            throw new InvalidSystemStateException("Monthly price is null");
+        }
+
+        if (leaseCreateDto.getStartDate() == null || leaseCreateDto.getEndDate() == null) {
+            throw new InvalidSystemStateException("No start date and/or end date");
+        }
 
         Integer clientId = leaseCreateDto.getExistingClientId();
 
