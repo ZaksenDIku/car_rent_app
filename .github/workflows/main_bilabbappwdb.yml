@@ -27,6 +27,10 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
+        env:
+          SPRING_DATASOURCE_URL: ${{secrets.DATABASE_URL}}
+          SPRING_DATASOURCE_USERNAME: ${{secrets.DATABASE_USER}}
+          SPRING_DATASOURCE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
         run: mvn clean install
 
       - name: Upload artifact for deployment job
