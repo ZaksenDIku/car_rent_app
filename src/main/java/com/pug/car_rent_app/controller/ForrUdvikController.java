@@ -44,7 +44,7 @@ public class ForrUdvikController {
 
         model.addAttribute("leasesEndingToday", leasesEndingToday);
 
-        return "/forrudvik/forrUdvikMain";
+        return "forrudvik/forrUdvikMain";
 
 
     }
