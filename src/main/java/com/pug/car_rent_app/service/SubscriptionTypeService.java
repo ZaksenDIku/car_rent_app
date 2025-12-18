@@ -19,6 +19,8 @@ public class SubscriptionTypeService {
         return subscriptionTypeRepository.getAllSubscriptionTypes();
     }
 
+    // This method checks if the number of months chosen by potential lease client
+    // matches a subscription type
     public boolean isValidPeriodLength(int length) {
         List<SubscriptionType> subscriptionTypes = subscriptionTypeRepository.getAllSubscriptionTypes();
 
@@ -47,6 +49,7 @@ public class SubscriptionTypeService {
 
     }
 
+    // This method returns the name of the subscription type that matches a number of months
     public String getSubscriptionNameByLength(int length) {
 
         List<SubscriptionType> subscriptionTypes = subscriptionTypeRepository.getAllSubscriptionTypes();

@@ -35,13 +35,15 @@ public class LeaseController {
     private SubscriptionTypeService subscriptionTypeService;
 
 
+    // creation of the session attribute dto to hold data between steps in the process
     @ModelAttribute("leaseCreateDto")
     public LeaseCreateDto leaseCreateDto() {
         return new LeaseCreateDto();
     }
 
 
-
+    // This method shows step 1 of the create new lease process
+    // This includes the already chosen car and former lease clients
     @GetMapping("/create/step1")
     public String startLease(
             @RequestParam("carId") int carId, @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto, Model model) {
@@ -72,6 +74,8 @@ public class LeaseController {
         return "lease/lease-create-1-client";
     }
 
+    // This method receives user choices for step 1 of the create new lease process. Former or new client.
+    // Cancels or continues
     @PostMapping("/create/step1")
     public String handleStep1(
             @RequestParam(name = "selectedClientId", required = false) Integer selectedClientId,
@@ -132,7 +136,8 @@ public class LeaseController {
     }
 
 
-
+    // This method shows step 2 of the create new lease process. Client info
+    // If a former client was chosen the client info will be prefilled
     @GetMapping("/create/step2")
     public String showStep2(
             @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto,
@@ -161,6 +166,9 @@ public class LeaseController {
         return "lease/lease-create-2-clientinfo";
     }
 
+
+    // This method receives user choices for step 2 of the create new lease process. Client info
+    // It validates input, give error message, cancels or continues
     @PostMapping("/create/step2")
     public String handleStep2(
             @RequestParam("action") String action,
@@ -195,7 +203,7 @@ public class LeaseController {
 
 
 
-
+    // This method shows step 3 of the create new lease process. Period
     @GetMapping("/create/step3")
     public String showStep3(
             @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto,
@@ -206,6 +214,9 @@ public class LeaseController {
         return "lease/lease-create-3-period";
     }
 
+    // This method receives user choices for step 3 of the create new lease process. Period
+    // It validates input, give error message, cancels or continues
+    // Calls service layer to get name of subscription from period
     @PostMapping("/create/step3")
     public String handleStep3(
             @RequestParam("action") String action,
@@ -241,7 +252,7 @@ public class LeaseController {
         return "redirect:/lease/create/step4";
     }
 
-
+    // This method shows step 4 of the create new lease process. Costs
     @GetMapping("/create/step4")
     public String showStep4(
             @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto,
@@ -252,6 +263,9 @@ public class LeaseController {
         return "lease/lease-create-4-costs";
     }
 
+
+    // This method receives user choices for step 4 of the create new lease process. Costs
+    // It validates input, give error message, cancels or continues
     @PostMapping("/create/step4")
     public String handleStep4(
             @RequestParam("action") String action,
@@ -281,7 +295,7 @@ public class LeaseController {
         return "redirect:/lease/create/step5";
     }
 
-
+    // This method shows step 5 of the create new lease process. Confirmation
     @GetMapping("/create/step5")
     public String showStep5(
             @ModelAttribute("leaseCreateDto") LeaseCreateDto leaseCreateDto,
@@ -291,6 +305,9 @@ public class LeaseController {
         return "lease/lease-create-5-confirmation";
     }
 
+
+    // This method receives user choices for step 5 of the create new lease process. Confirmation
+    // Cancels or continues to datareg main page after calling service to create the new lease agreement
     @PostMapping("/create/step5")
     public String handleStep5(
             @RequestParam("action") String action,

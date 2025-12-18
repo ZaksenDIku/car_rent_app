@@ -4,6 +4,8 @@ import com.pug.car_rent_app.model.Car;
 
 import java.util.Comparator;
 
+// This is a Comparator implementation that sorts Car
+// It sorts by Brand, then Model, then VehicleNo
 public class CarsSortBrandComp implements Comparator<Car> {
 
     @Override

@@ -2,7 +2,10 @@ package com.pug.car_rent_app.model;
 
 import java.time.LocalDate;
 
-
+// This is a DTO with the purpose of collecting data entered by user over several steps
+// for creating a new lease agreement
+// On top of holding relevant data for a lease agreement
+// it also has data on new vs former client and a String for error message
 public class LeaseCreateDto {
 
 
@@ -266,6 +269,10 @@ public class LeaseCreateDto {
         this.subscriptionTypeName = subscriptionTypeName;
     }
 
+
+    // This method sets client name and address to null
+    // It is for when user has chosen a client in create new lease agreement,
+    // but then chooses to step back and enter a new client instead
     public void setClientNameAddressNull() {
 
         this.setNameFirst(null);

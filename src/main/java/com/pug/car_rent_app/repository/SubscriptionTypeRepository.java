@@ -15,6 +15,7 @@ public class SubscriptionTypeRepository {
     @Autowired
     JdbcTemplate template;
 
+    // This method gets all subscription types
     public List<SubscriptionType> getAllSubscriptionTypes() {
 
         String sql = "SELECT id, type_name AS name, min_months AS monthMin, max_months AS monthMax FROM subscription_types";

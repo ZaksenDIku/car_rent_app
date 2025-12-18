@@ -15,6 +15,8 @@ public class DataRegController {
 
 
 
+    // This method responds to a HTTP GET request and requests the view and Thymeleaf to send dataregmain page to client
+    // Spring model interface will contain a list of cars sorted by Brand and with status AVAILABLE
     @GetMapping("/dataregmain")
     public String dataregmain(Model model) {
 

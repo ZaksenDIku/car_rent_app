@@ -18,6 +18,8 @@ public class ClientService {
     @Autowired
     private AddressService addressService;
 
+
+    // This method returns a list of all clients that lease, sorted by last name
     public List<Client> getAllLeaseClientsSortedLastName() {
 
         List<Client> allLeaseClientsSortedLastName = clientRepository.findAllLeaseCustomers();
@@ -27,6 +29,7 @@ public class ClientService {
 
 
     }
+
 
     public Client getClientById(int id) {
         return clientRepository.getClientById(id);

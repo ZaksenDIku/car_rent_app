@@ -17,6 +17,7 @@ import java.util.List;
 @Service
 public class CarService {
 
+    // Injection with constructor to make it possible to use mocking with Mockito
     private final CarRepository carRepository;
 
     public CarService(CarRepository carRepository) {
@@ -30,7 +31,7 @@ public class CarService {
         return carRepository.getAllCars();
     }
 
-    //
+    // This method returns all cars with the status given in as argument
     public List<Car> getAllCarsByStatus(CarStatus carStatus) {
 
         List<Car> allCars = getAllCars();
@@ -46,6 +47,9 @@ public class CarService {
 
     }
 
+    // This method returns a car by id
+    // It throws NotFoundException when repository fails to get the car
+    // It throws InvalidSystemStateException if id, here Integer wrapper class type, is null
     public Car getCarById(Integer id) {
 
         if (id == null) {
@@ -60,6 +64,9 @@ public class CarService {
         return car;
     }
 
+
+    // This method checks that a change in car status doesn't go backwards in the car journey direction
+    // before calling repository to change car status
     public void updateCarStatus(int id, CarStatus carStatus) {
 
         CarStatus carStatusPre = getCarById(id).getCarStatus();
@@ -72,10 +79,13 @@ public class CarService {
 
     }
 
+
+    // This method sorts the list of cars by Brand etc before returning the list
     public List<Car> sortCarListBrand(List<Car> cars) {
         cars.sort(new CarsSortBrandComp());
         return cars;
     }
+
 
     public List<Car> getCarsReturned() {
 

@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+// Custom rowmapper with the purpose of creating two java objects from one query
 public class ClientAddressRowMapper implements RowMapper<Client> {
 
     @Override

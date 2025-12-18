@@ -7,19 +7,23 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
-
+// This class validates the user input at the different steps of create new lease agreement
+// It receives the dto
 @Component
 public class CreateLeaseInputValidator {
 
     private final SubscriptionTypeService subscriptionTypeService;
 
     @Autowired
+
+    // Injection by constructor to be able to mock with Mockito
     public CreateLeaseInputValidator(SubscriptionTypeService subscriptionTypeService) {
         this.subscriptionTypeService = subscriptionTypeService;
     }
 
 
-
+    // This method checks that the process is not started without a car
+    // Returns an error message if relevant or otherwise null
     public String validateStep1(LeaseCreateDto leaseCreateDto) {
         if (leaseCreateDto.getCarId() == null) {
             return "Der er ikke blevet valgt en bil. Det er ikke muligt at gå videre herfra";
@@ -28,7 +32,8 @@ public class CreateLeaseInputValidator {
         return null;
     }
 
-
+    // This method validates data input of step 2, client info
+    // Returns an error message if relevant or otherwise null
     public String validateStep2ClientInfoFields(LeaseCreateDto leaseCreateDto) {
 
         if (isNullOrSpace(leaseCreateDto.getNameFirst())
@@ -87,6 +92,8 @@ public class CreateLeaseInputValidator {
     }
 
 
+    // This method validates data input of step 3, Period
+    // Returns an error message if relevant or otherwise null
     public String validateStep3PeriodFields(LeaseCreateDto leaseCreateDto) {
 
         if (leaseCreateDto.getStartDate() == null || leaseCreateDto.getMonths() == null) {
@@ -110,6 +117,9 @@ public class CreateLeaseInputValidator {
         return null;
     }
 
+
+    // This method validates data input of step 4, Costs
+    // Returns an error message if relevant or otherwise null
     public String validateStep4CostsFields(LeaseCreateDto leaseCreateDto) {
 
         if (leaseCreateDto.getMonthlyPrice() == null || leaseCreateDto.getMaxKmPerMonth() == null) {
@@ -142,7 +152,7 @@ public class CreateLeaseInputValidator {
 
     }
 
-
+    // This method checks if a String is null or empty
     private boolean isNullOrSpace(String s) {
         return s == null || s.trim().isEmpty();
     }

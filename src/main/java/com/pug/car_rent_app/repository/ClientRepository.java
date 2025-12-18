@@ -19,7 +19,7 @@ public class ClientRepository {
     JdbcTemplate template;
 
 
-
+    // This method gets all clients of type lease and joins their addresses
     public List<Client> findAllLeaseCustomers() {
 
         String sql = """
@@ -38,7 +38,7 @@ public class ClientRepository {
         return template.query(sql, new ClientAddressRowMapper());
     }
 
-
+    // Tbis method gets a client by id and joins the address
     public Client getClientById(int clientId) {
         String sql = """
                 SELECT c.id AS client_id,
@@ -57,7 +57,8 @@ public class ClientRepository {
 
 
 
-
+    // This method creates a client in the database
+    // It returns the id of the new client or 0 if it fails to create
     public int insertClient(Client client) {
 
         String sql = """

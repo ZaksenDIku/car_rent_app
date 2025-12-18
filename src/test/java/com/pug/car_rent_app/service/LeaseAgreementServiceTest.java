@@ -24,6 +24,10 @@ class LeaseAgreementServiceTest {
     @InjectMocks
     private LeaseAgreementService leaseAgreementService;
 
+
+    // This test tests that createLeaseFromDto in LeaseAgreementService throws
+    // InvalidSystemStateException when the dto for collecting data during the process
+    // of create new lease agreement doesn't contain a non-null car id
     @Test
     void createLease_NoCarId_ThrowsInvalidSystemStateException() {
         LeaseCreateDto leaseCreateDto = new LeaseCreateDto();

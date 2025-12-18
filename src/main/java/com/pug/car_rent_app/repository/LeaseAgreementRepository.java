@@ -20,7 +20,7 @@ public class LeaseAgreementRepository {
     @Autowired
     JdbcTemplate template;
 
-
+    // This method gets all lease agreements
     public List<LeaseAgreement> getAllLeaseAgreements() {
 
         RowMapper<LeaseAgreement> rowMapper = new BeanPropertyRowMapper<>(LeaseAgreement.class);
@@ -36,6 +36,8 @@ public class LeaseAgreementRepository {
 
     }
 
+    // This method creates a lease agreement
+    // It handles a bit of convertion between types in java vs MySQL, and date vs datetime
     public int insertLeaseAgreement(LeaseAgreement lease) {
 
         String sql = """

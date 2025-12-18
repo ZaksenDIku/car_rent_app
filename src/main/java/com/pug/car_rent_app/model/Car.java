@@ -1,5 +1,6 @@
 package com.pug.car_rent_app.model;
 
+// This class maps to table cars in database
 public class Car {
 
     private int id;

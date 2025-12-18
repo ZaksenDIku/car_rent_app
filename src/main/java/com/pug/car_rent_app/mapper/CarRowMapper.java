@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+// Custom rowmapper with the purpose of being able to convert string from database directly to CarStatus enum
 public class CarRowMapper implements RowMapper<Car> {
 
     @Override

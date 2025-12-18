@@ -4,6 +4,8 @@ import com.pug.car_rent_app.model.Client;
 
 import java.util.Comparator;
 
+// This is a Comparator implementation that sorts Client
+// It sorts by last name case-insensitive
 public class ClientSortLastNameComp implements Comparator<Client> {
 
     @Override

@@ -17,7 +17,7 @@ public class CarRepository {
     @Autowired
     JdbcTemplate template;
 
-
+    // This method gets all cars from table cars and create Car objects with CarStatus enums
     public List<Car> getAllCars() {
 
         String sql = """
@@ -33,7 +33,8 @@ public class CarRepository {
 
     }
 
-
+    // This method gets a car from cars table and create a Car object with CarStatus enum
+    // It returns null if it fails to get the car
     public Car getCarById(Integer carId) {
         String sql = """
                 SELECT c.id, c.vehicle_no, c.vin, c.license_plate,
@@ -51,6 +52,9 @@ public class CarRepository {
     }
 
 
+    // This method updates the status of a car
+    // and creates a new row in the car_status_histories joint table with a timestamp
+    // it throws NotFoundException if the car id is not in the database
     public void updateCarStatus(int carId, CarStatus carStatus) {
         String statusCode = carStatus.name();
 
@@ -62,20 +66,18 @@ public class CarRepository {
         )
         WHERE id = ?;
     """;
-        template.update(sql, statusCode, carId);
+        int numberOfRowsUpdated = template.update(sql, statusCode, carId);
+
+        if (numberOfRowsUpdated == 0) {
+            throw new NotFoundException("Can't update non-existing car");
+        }
 
         // Log history
         String historySql = """
         INSERT INTO car_status_histories(car_id, status_id, change_time)
         VALUES (?, (SELECT id FROM car_statuses WHERE status_code = ?), NOW());
     """;
-        int numberOfRowsUpdated = template.update(historySql, carId, statusCode);
-
-        if (numberOfRowsUpdated == 0) {
-            throw new NotFoundException("Can't update non-existing car");
-        }
+        template.update(historySql, carId, statusCode);
 
     }
-
-
 }

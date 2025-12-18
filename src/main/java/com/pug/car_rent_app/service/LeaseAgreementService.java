@@ -22,6 +22,7 @@ public class LeaseAgreementService {
     @Autowired
     AddressService addressService;
 
+    // Injection by constructor to be able to mock with Mockito
     private final CarService carService;
     private final LeaseAgreementRepository leaseAgreementRepository;
 
@@ -34,6 +35,12 @@ public class LeaseAgreementService {
     }
 
 
+    // This method creates a new lease agreement in the database from the data collected in the dto
+    // used in the multistep process of new lease agreement
+    // It throws InvalidSystemStateException after a few checks for incoherent data
+    // It also creates in the database the client and address if new
+    // It also updates the car status to LEASED
+    // and handles conversion between types of java and MySQL
     @Transactional
     public void createLeaseFromDto(LeaseCreateDto leaseCreateDto) {
 

@@ -24,7 +24,7 @@ class CreateLeaseInputValidatorTest {
     @InjectMocks
     CreateLeaseInputValidator createLeaseInputValidator;
 
-
+    // This test check for return null if complete and valid data is entered at step 2
     @Test
     public void validateStep2ClientInfoFields_CompleteValidInfo_ReturnsNull() {
         LeaseCreateDto leaseCreateDto = getValidDtoForStep2();
@@ -33,6 +33,8 @@ class CreateLeaseInputValidatorTest {
 
     }
 
+    // This test check for correct error message returned if not all required
+    // fields are filled at step 2
     @Test
     public void validateStep2ClientInfoFields_NoInfoInFields_ReturnsSpecificErrorMessage() {
         LeaseCreateDto leaseCreateDto = new LeaseCreateDto();
@@ -40,6 +42,7 @@ class CreateLeaseInputValidatorTest {
         assertEquals("Manglende udfyldning", result);
     }
 
+    // This test check for correct error message returned if phone number is not correct DK format
     @Test
     public void validateStep2ClientInfoFields_InvalidPhone_ReturnsSpecificErrorMessage() {
         LeaseCreateDto leaseCreateDto = getValidDtoForStep2();
@@ -53,7 +56,8 @@ class CreateLeaseInputValidatorTest {
 
 
 
-
+    // This test check for return null if complete and valid data is entered at step 3
+    // subscriptionTypeService is mocked to always return "limited"
     @Test
     public void validateStep3PeriodFields_CompleteValidInfo_ReturnsNull() {
         LeaseCreateDto leaseCreateDto = getValidDtoForStep3();
@@ -67,7 +71,9 @@ class CreateLeaseInputValidatorTest {
     }
 
 
-
+    // This test check for correct error message returned if entered number of months at step 3
+    // is invalid compared to subscription types in database
+    // subscriptionTypeService is mocked to always return null (no match)
     @Test
     public void validateStep3PeriodFields_InvalidNumberOfMonths_ReturnsSpecificErrorMessage() {
         LeaseCreateDto leaseCreateDto = getValidDtoForStep3();
@@ -80,6 +86,9 @@ class CreateLeaseInputValidatorTest {
 
     }
 
+
+    // This test check for correct error message returned if start date of lease entered in step 3
+    // is more than a week in the past
     @Test
     public void validateStep3PeriodFields_StartDateMoreThanOneWeekPast_ReturnsSpecificErrorMessage() {
         LeaseCreateDto leaseCreateDto = getValidDtoForStep3();
@@ -94,6 +103,7 @@ class CreateLeaseInputValidatorTest {
     }
 
 
+    // This test check for return null if complete and valid data is entered at step 4
     @Test
     public void validateStep4CostsFields_CompleteValidInfo_ReturnsNull() {
         LeaseCreateDto leaseCreateDto = getValidDtoForStep4();
@@ -102,7 +112,8 @@ class CreateLeaseInputValidatorTest {
 
     }
 
-
+    // This test check for correct error message returned if user doesn't mark
+    // creditapproval as passed in step 4
     @Test
     public void validateStep4CostsFields_IsNotCreditApproved_ReturnsSpecificErrorMessage() {
         LeaseCreateDto leaseCreateDto = getValidDtoForStep4();
@@ -119,7 +130,7 @@ class CreateLeaseInputValidatorTest {
 
 
 
-
+    // This method is a helper that prepares a dto with valid values for step 2
     private LeaseCreateDto getValidDtoForStep2() {
         LeaseCreateDto leaseCreateDto = new LeaseCreateDto();
         leaseCreateDto.setNameFirst("Anders");
@@ -136,6 +147,7 @@ class CreateLeaseInputValidatorTest {
         return leaseCreateDto;
     }
 
+    // This method is a helper that prepares a dto with valid values for step 3
     private LeaseCreateDto getValidDtoForStep3() {
         LeaseCreateDto leaseCreateDto = getValidDtoForStep2();
         leaseCreateDto.setStartDate(LocalDate.now());
@@ -146,6 +158,7 @@ class CreateLeaseInputValidatorTest {
         return leaseCreateDto;
     }
 
+    // This method is a helper that prepares a dto with valid values for step 4
     private LeaseCreateDto getValidDtoForStep4() {
         LeaseCreateDto leaseCreateDto = getValidDtoForStep3();
         leaseCreateDto.setMonthlyPrice(3000);

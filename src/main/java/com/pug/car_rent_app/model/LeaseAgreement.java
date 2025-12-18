@@ -2,7 +2,7 @@ package com.pug.car_rent_app.model;
 
 import java.time.LocalDateTime;
 
-
+// This class maps to table lease_agreements in database
 public class LeaseAgreement {
 
     private Integer id;

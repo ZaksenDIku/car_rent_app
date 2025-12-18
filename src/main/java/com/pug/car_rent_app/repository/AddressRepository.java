@@ -11,7 +11,8 @@ public class AddressRepository {
     @Autowired
     JdbcTemplate template;
 
-
+    // This method inserts an address into the table addresses in the database
+    // It returns the id of the new address or 0 if insert failed
     public int insertAddress(Address address) {
 
         String sql = """

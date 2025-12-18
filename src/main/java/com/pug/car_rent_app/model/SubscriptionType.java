@@ -1,5 +1,7 @@
 package com.pug.car_rent_app.model;
 
+// This class maps to table subscription_types in the database
+// it implements Comparable with the purpose of sorting on MonthMax in descending order
 public class SubscriptionType implements Comparable<SubscriptionType> {
 
     private Integer id;
