@@ -28,25 +28,13 @@ Bud pp BilAbonnement A/S ønske om platform for leasing og presalg af biler
 ---
 
 ## Installation (lokalt)
+
 ```bash
-git clone <[repo-url](https://github.com/ZaksenDIku/car_rent_app)>
+git clone https://github.com/ZaksenDIku/car_rent_app
 cd car_rent_app
 mvn spring-boot:run
-
-
-
-
-
 ---
-
-
-
-
-
-
-
-
-
+```
 ## Glossary
 
 | Begreb            | Alias          | Labels | Beskrivelse |
