@@ -6,12 +6,12 @@ https://car-rent-app-akbfh5bwdteuduhg.switzerlandnorth-01.azurewebsites.net/
 ---
 
 ## Projektbeskrivelse
-Kort beskrivelse af applikationen.  
-(Fx: En simpel webapplikation til administration og booking af biler.)
+Bud pp BilAbonnement A/S ønske om platform for leasing og presalg af biler
+
 
 ---
 
-## Funktionalitet (kort)
+## Funktionalitet 
 - Oprette og vise biler  
 - Oprette og administrere bookinger  
 - Simpelt web-interface (Thymeleaf)  
