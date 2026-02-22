@@ -29,9 +29,10 @@ Bud pp BilAbonnement A/S ønske om platform for leasing og presalg af biler
 
 ## Installation (lokalt)
 ```bash
-git clone <repo-url>
+git clone <[repo-url](https://github.com/ZaksenDIku/car_rent_app)>
 cd car_rent_app
 mvn spring-boot:run
+
 ---
 
 ## Bilag 
@@ -51,6 +52,7 @@ mvn spring-boot:run
 **Bilag 4 – Admin / administration**
 <img width="165" height="201" alt="image" src="https://github.com/user-attachments/assets/a7d20ba6-91c6-4304-bede-8a0ce0fd5502" />
 
+---
 
 ## Glossary
 
@@ -79,3 +81,4 @@ mvn spring-boot:run
 | Udleveringsliste  |                |        | Mulige udleveringer. |
 | Unlimited         |                |        | Udlejning af biler uden begrænsninger. |
 
+---
