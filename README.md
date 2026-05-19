@@ -38,6 +38,9 @@ cd car_rent_app
 mvn spring-boot:run
 ---
 ```
+
+Programmet kan derefter åbnes lokalt via browseren.
+
 ## Glossary
 
 | Begreb            | Alias          | Labels | Beskrivelse |
