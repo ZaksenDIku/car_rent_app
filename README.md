@@ -27,6 +27,7 @@ Projektet samler centrale arbejdsgange for biler, kunder og leasingaftaler i et 
 - Thymeleaf  
 - MySQL  
 - Maven  
+- Azure App Service  
 ---
 
 ## Installation (lokalt)
