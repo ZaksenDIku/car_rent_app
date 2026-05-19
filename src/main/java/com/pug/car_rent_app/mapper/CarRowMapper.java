@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 // Custom rowmapper with the purpose of being able to convert string from database directly to CarStatus enum
+// Eksempel: jdbcTemplate.query("SELECT * FROM car", new CarRowMapper());
 public class CarRowMapper implements RowMapper<Car> {
 
     @Override

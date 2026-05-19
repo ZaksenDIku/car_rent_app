@@ -7,7 +7,335 @@
     --ba-color-background-primary: #ffffff;
     --ba-color-background-cards: #f5f5f7;
     --ba-color-background-cards-dark: #f0f0f0;
-    --ba-color-border-cards: #d9d9d9;
+    --b/* === FONT === */
+       @import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+       /* === ROOT VARIABLES === */
+       :root {
+           --ba-color-primary-blue: #1892c3;
+           --ba-color-background-primary: #ffffff;
+           --ba-color-background-cards: #f5f5f7;
+           --ba-color-background-cards-dark: #f0f0f0;
+           --ba-color-border-cards: #d9d9d9;
+           --ba-color-text: #000000;
+           --ba-color-text-secondary: #878788;
+           --ba-font-family: 'Montserrat', sans-serif;
+           --ba-radius-sm: 10px; /* lidt skarpere */
+           --ba-radius-md: 20px;
+           --ba-spacing-sm: 0.5rem;
+           --ba-spacing-md: 1rem;
+           --ba-spacing-lg: 1.5rem;
+       }
+
+       /* === GLOBAL === */
+       *,
+       *::before,
+       *::after {
+           box-sizing: border-box;
+       }
+
+       body {
+           margin: 0;
+           font-family: var(--ba-font-family);
+           background: var(--ba-color-background-primary);
+           color: var(--ba-color-text);
+       }
+
+       /* === PAGE STRUCTURE === */
+       .datareg-page {
+           background: var(--ba-color-background-primary);
+       }
+
+       /* === MAIN LAYOUT  === */
+       .datareg-main__layout {
+           display: grid;
+           grid-template-columns: 2fr 2fr 2fr;
+           gap: var(--ba-spacing-lg);
+           padding: 1.5rem 2rem 2rem;
+           align-items: start;
+
+
+           /* === FORCE FULL WIDTH LAYOUT === */
+           .datareg-main__layout {
+               width: 100% !important;
+               max-width: none !important;
+               margin: 0 !important;
+           }
+       }
+
+
+       /* Ens titler, så de flugter */
+       .datareg-main__layout h1 {
+           margin: 0 0 0.9rem 0;
+           font-size: 2.1rem;
+           font-weight: 600;
+           line-height: 1.1;
+           letter-spacing: -0.02em;
+       }
+
+       /* === PANE WRAPPERS === */
+       .datareg-main__pane-left,
+       .datareg-main__pane-kpi,
+       .datareg-main__pane-right {
+           display: flex;
+           flex-direction: column;
+           gap: var(--ba-spacing-sm);
+       }
+
+       /* === CAR LIST AREA (venstre panel) === */
+       .datareg-car-list-container {
+           border-radius: var(--ba-radius-sm);
+           background: #f7f7f7;
+           border: 1px solid var(--ba-color-border-cards);
+           padding: 1rem;
+           display: flex;
+           flex-direction: column;
+       }
+
+       /* Header */
+       .datareg-cars__header {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           padding: 0 0.25rem 0.75rem;
+           border-bottom: 1px solid #e6e6e6;
+           margin-bottom: 0.75rem;
+       }
+
+       .datareg-cars-header__title {
+           font-size: 1rem;
+           font-weight: 600;
+       }
+
+       /* Indhold baggrund */
+       .datareg-car-list {
+           background: var(--ba-color-background-cards);
+           border: 1px solid var(--ba-color-border-cards);
+           border-radius: var(--ba-radius-sm);
+           padding: 0.75rem;
+           overflow: visible;
+       }
+
+       /* === 2-COLUMN LAYOUT (venstre: ledige/udlejet) === */
+       .datareg-car-columns {
+           display: grid;
+           grid-template-columns: 1fr 1fr;
+           gap: 14px;
+           align-items: start;
+       }
+
+       /* Kolonne panel (bruges også i højre) */
+       .datareg-car-column {
+           background: #fff;
+           border: 1px solid #e6e6e6;
+           border-radius: var(--ba-radius-sm);
+           padding: 0.75rem;
+           display: flex;
+           flex-direction: column;
+       }
+
+       /* Kolonne header + badge alignment */
+       .datareg-car-column__title {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           gap: 10px;
+
+           margin: 0 0 0.6rem 0;
+           padding-bottom: 0.55rem;
+           border-bottom: 1px solid #ededed;
+
+           font-size: 0.85rem;
+           font-weight: 700;
+           text-transform: uppercase;
+           letter-spacing: 0.08em;
+       }
+
+       /* === BADGES (ens alle steder) === */
+       .count-badge {
+           min-width: 28px;
+           height: 22px;
+           padding: 0 8px;
+           border-radius: 999px;
+           font-size: 0.75rem;
+           font-weight: 700;
+           color: #fff;
+           display: inline-flex;
+           align-items: center;
+           justify-content: center;
+           background: var(--ba-color-primary-blue);
+       }
+
+       /* === INDIVIDUEL SCROLL BOKS PER KOLONNE === */
+       .datareg-car-scrollbox {
+           overflow-y: auto;
+           max-height: 600px;
+           padding-right: 6px;
+
+           display: flex;
+           flex-direction: column;
+           gap: 10px;
+
+           border: 1px solid #ededed;
+           border-radius: var(--ba-radius-sm);
+           padding: 10px;
+           background: #fafafa;
+       }
+
+       /* === CAR CARD (ens udseende overalt) === */
+       .datareg-car-card {
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           gap: 12px;
+
+           padding: 0.85rem 0.95rem;
+           border: 1px solid #ededed;
+           border-radius: 12px;
+           background: #fff;
+       }
+
+       .datareg-car-card__info {
+           flex: 1;
+           min-width: 0;
+       }
+
+       .datareg-car-card__title {
+           font-weight: 650;
+           font-size: 1rem;
+           margin-bottom: 0.25rem;
+       }
+
+       .datareg-car-card__meta {
+           font-size: 0.82rem;
+           color: var(--ba-color-text);
+           display: flex;
+           flex-wrap: wrap;
+           gap: 0.9rem;
+       }
+
+       .datareg-car-card__meta--muted {
+           color: var(--ba-color-text-secondary);
+           margin-top: 0.2rem;
+           font-size: 0.78rem;
+       }
+
+       /* === CARD BUTTONS === */
+       .datareg-car-card__actions {
+           display: flex;
+           gap: 0.5rem;
+           margin-left: 0.5rem;
+           flex-shrink: 0;
+       }
+
+       .car-action-btn {
+           display: inline-flex;
+           align-items: center;
+           justify-content: center;
+           padding: 0.28rem 0.8rem;
+           font-size: 0.85rem;
+           border-radius: 999px;
+           cursor: pointer;
+           border: 1px solid transparent;
+           white-space: nowrap;
+       }
+
+       .car-action-btn--secondary {
+           background: #e6e6e6;
+           color: #333;
+           border-color: #cfcfcf;
+       }
+
+       .car-action-btn--primary {
+           background: var(--ba-color-primary-blue);
+           color: #fff;
+           border-color: var(--ba-color-primary-blue);
+       }
+
+       /* === KPI PANEL === */
+       .kpi-card {
+           background: var(--ba-color-background-cards);
+           border: 1px solid var(--ba-color-border-cards);
+           border-radius: var(--ba-radius-sm);
+           padding: var(--ba-spacing-lg);
+       }
+
+       .kpi-title {
+           margin: 0 0 1rem;
+           font-size: 1.05rem;
+           font-weight: 700;
+           border-bottom: 1px solid #ddd;
+           padding-bottom: 0.5rem;
+       }
+
+       .kpi-item {
+           font-size: 0.98rem;
+           display: flex;
+           justify-content: space-between;
+           gap: 12px;
+           padding: 0.4rem 0;
+       }
+
+       /* === MOBILE === */
+       @media (max-width: 900px) {
+           .datareg-main__layout {
+               grid-template-columns: 1fr;
+           }
+
+           .datareg-car-columns {
+               grid-template-columns: 1fr;
+           }
+       }
+
+       /* === HEADER / TOPBAR (tilbageført fra style.css) === */
+       .datareg-page__top-bar {
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           padding: 0.75rem 2rem;
+           background: var(--ba-color-background-primary);
+           border-bottom: 1px solid var(--ba-color-border-cards);
+       }
+
+       .datareg-page__top-logo {
+           height: 38px;
+           width: auto;
+       }
+
+       /* === BUTTON STYLES (tilbageført fra style.css) === */
+       .ba-btn {
+           min-width: 130px;
+           display: inline-flex;
+           align-items: center;
+           justify-content: center;
+           padding: 0.45rem 1.25rem;
+           border-radius: var(--ba-radius-md);
+           border: 2px solid var(--ba-color-primary-blue);
+           background: var(--ba-color-background-cards);
+           color: var(--ba-color-primary-blue);
+           font-size: 0.95rem;
+           font-weight: 600;
+           text-decoration: none;
+           cursor: pointer;
+           white-space: nowrap;
+       }
+
+       .ba-btn:hover {
+           background: var(--ba-color-primary-blue);
+           color: var(--ba-color-background-primary);
+       }
+
+       .btn--dim {
+           background: var(--ba-color-background-primary);
+           color: var(--ba-color-text);
+           border-color: var(--ba-color-border-cards);
+       }
+
+       .btn--dim:hover {
+           background: var(--ba-color-background-cards-dark);
+           color: var(--ba-color-text);
+       }
+a-color-border-cards: #d9d9d9;
     --ba-color-text: #000000;
     --ba-color-text-secondary: #878788;
     --ba-font-family: 'Montserrat', sans-serif;

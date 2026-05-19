@@ -31,7 +31,7 @@ public class ForrUdvikController {
     //viser forretnings-udvikler siden
     @GetMapping("/forrudvik")
     public String showForrudvikPage(Model model){
-
+  
         //Car status til venstre
         model.addAttribute("availableCars", carService.getAllCarsByStatus(CarStatus.AVAILABLE));
         model.addAttribute("leasedCars", carService.getAllCarsByStatus(CarStatus.LEASED));

@@ -6,7 +6,8 @@ https://car-rent-app-akbfh5bwdteuduhg.switzerlandnorth-01.azurewebsites.net/
 ---
 
 ## Projektbeskrivelse
-Bud pp BilAbonnement A/S ønske om platform for leasing og presalg af biler
+Bud pp BilAbonnement A/S ønske om platform for leasing og presalg af biler.
+Projektet samler centrale arbejdsgange for biler, kunder og leasingaftaler i et simpelt web-interface.
 
 
 ---
@@ -14,6 +15,7 @@ Bud pp BilAbonnement A/S ønske om platform for leasing og presalg af biler
 ## Funktionalitet 
 - Oprette og vise biler  
 - Oprette og administrere bookinger  
+- Følge status på leasingaftaler  
 - Simpelt web-interface (Thymeleaf)  
 - Database (MySQL)
 
